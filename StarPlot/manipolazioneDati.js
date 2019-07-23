@@ -105,7 +105,7 @@ function listOfPlayers(listOfPlayer, left, testo){
   .html(String);
 }
 
-//funzione che ricerca un giocatore
+//funzione che ricerca un giocatore, ritornano 2 liste perche la prima ritorna solo i nomi, la secondo invece l'oggetto completo
 function searchPlayer(data,val){
   var listOfPlayer1=[];
   var listOfPlayerStarPlot1=[];
