@@ -2,12 +2,68 @@
 
 var StarPlot =
 {
-	starPlot:function(cfg,player1,player2,attribute){
+	////////////////////////////////////////////
+	/////////// Initiate legend ////////////////
+	////////////////////////////////////////////
+	//prende la lista dei giocatori e cfg
+	legenda: function(legendOptions,cfg){
+
+	  var colorscale = cfg.color;
+	  d3.selectAll(".svglegend").remove();
+	  var svg = d3.selectAll(".svglegend")
+	    .data([1]).enter()
+	    .append("div")
+	    .attr("class","svglegend")
+	    .attr("style", "position: absolute; top: "+cfg.top+"px; left: "+cfg.left+"px; width: "+cfg.width+"px;")
+	  	.append('svg')
+	  	.attr("width", cfg.w)
+	  	.attr("height", cfg.h)
+
+	  //Create the title for the legend
+	  var text = svg.append("text")
+	  	.attr("class", "title")
+	  	.attr('transform', 'translate(90,0)')
+	  	.attr("x", cfg.w - 370)
+	  	.attr("y", 10)
+	  	.attr("font-size", "12px")
+	  	.attr("fill", "#404040")
+	  	.text("Items:");
+
+	  //Initiate Legend
+	  var legend = svg.append("g")
+	  	.attr("class", "legend")
+	  	.attr("height", cfg.h)
+	  	.attr("width", cfg.w-100)
+	  	.attr('transform', 'translate(90,20)')
+	  	;
+	  	//Create colour squares
+	  	legend.selectAll('rect')
+	  	  .data(legendOptions)
+	  	  .enter()
+	  	  .append("rect")
+	  	  .attr("x", cfg.w - 365)
+	  	  .attr("y", function(d, i){ return i * 20;})
+	  	  .attr("width", 10)
+	  	  .attr("height", 10)
+	  	  .style("fill", function(d, i){ return colorscale(i);})
+	  	  ;
+	  	//Create text next to squares
+	  	legend.selectAll('text')
+	  	  .data(legendOptions)
+	  	  .enter()
+	  	  .append("text")
+	  	  .attr("x", cfg.w - 352)
+	  	  .attr("y", function(d, i){ return i * 20 + 9;})
+	  	  .attr("font-size", "11px")
+	  	  .attr("fill", "#737373")
+	  	  .text(function(d) { return d; })
+	  	  ;
+	},
+
+	starPlot:function(cfg,player1,player2,attribute,legendOptions,cfgLegend){
     //metto gli input in variabili apposite
     var allAxis=attribute;
     var players=[player1,player2];
-
-
 
     //creo variabili che mi servono per fare i calcoli della posizione dei vari assi
   	var maxValue = cfg.maxValue;
@@ -158,68 +214,18 @@ var StarPlot =
                     d3.select(".radar-chart-serie1").remove();
                     var players_invert=[players_conf[1],players_conf[0]];
                     poligoni(players_invert);
+										if(cfgLegend.legendInvert){
+											var players_invert_legend=[legendOptions[1],legendOptions[0]];
+											cfgLegend.legendInvert=false;
+										}else{
+											var players_invert_legend=[legendOptions[0],legendOptions[1]];
+											cfgLegend.legendInvert=true;
+										}
+										StarPlot.legenda(players_invert_legend,cfgLegend);
                 });
       	  series++;
       	});
       }
       poligoni(players);
-	},
-
-	////////////////////////////////////////////
-	/////////// Initiate legend ////////////////
-	////////////////////////////////////////////
-	//prende la lista dei giocatori e cfg
-	legenda: function(legendOptions,cfg){
-
-	  var colorscale = cfg.color;
-	  d3.selectAll(".svglegend").remove();
-	  var svg = d3.selectAll(".svglegend")
-	    .data([1]).enter()
-	    .append("div")
-	    .attr("class","svglegend")
-	    .attr("style", "position: absolute; top: "+cfg.top+"px; left: "+cfg.left+"px; width: "+cfg.width+"px;")
-	  	.append('svg')
-	  	.attr("width", cfg.w)
-	  	.attr("height", cfg.h)
-
-	  //Create the title for the legend
-	  var text = svg.append("text")
-	  	.attr("class", "title")
-	  	.attr('transform', 'translate(90,0)')
-	  	.attr("x", cfg.w - 370)
-	  	.attr("y", 10)
-	  	.attr("font-size", "12px")
-	  	.attr("fill", "#404040")
-	  	.text("Players");
-
-	  //Initiate Legend
-	  var legend = svg.append("g")
-	  	.attr("class", "legend")
-	  	.attr("height", cfg.h)
-	  	.attr("width", cfg.w-100)
-	  	.attr('transform', 'translate(90,20)')
-	  	;
-	  	//Create colour squares
-	  	legend.selectAll('rect')
-	  	  .data(legendOptions)
-	  	  .enter()
-	  	  .append("rect")
-	  	  .attr("x", cfg.w - 365)
-	  	  .attr("y", function(d, i){ return i * 20;})
-	  	  .attr("width", 10)
-	  	  .attr("height", 10)
-	  	  .style("fill", function(d, i){ return colorscale(i);})
-	  	  ;
-	  	//Create text next to squares
-	  	legend.selectAll('text')
-	  	  .data(legendOptions)
-	  	  .enter()
-	  	  .append("text")
-	  	  .attr("x", cfg.w - 352)
-	  	  .attr("y", function(d, i){ return i * 20 + 9;})
-	  	  .attr("font-size", "11px")
-	  	  .attr("fill", "#737373")
-	  	  .text(function(d) { return d; })
-	  	  ;
 	}
 }
