@@ -114,7 +114,8 @@ input:
   formazione: è un dizionario con 4 elementi che indicano il numero dei giocatori della formazione titolare divisi in attacco,centrocampo,difesa e portiere es: 3341  tradotto in 433
   numGiocatoriPerPosizione: è un dizionario identico a formazione ma mi indica il numero dei giocatori che una squadra ha in ogni ruolo
 output:
-  un dizionario con 6 skill {chiave:valore} dove ogni skill è la somma di una percentuale delle skill di ogni giocatori
+  club: un dizionario con 6 skill {chiave:valore} dove ogni skill è la somma di una percentuale delle skill di ogni giocatori
+  giocatori: una lista di giocatori dove un giocatore è un dizionario {chiave:valore} composto da le 6 skill, il nome, il club, se è titolare o no, la posizione
 */
 function sixSkillGenerateForEachPlayer(squadra,formazione,numGiocatoriPerPosizione){
   var tit=0.90;
@@ -129,7 +130,7 @@ function sixSkillGenerateForEachPlayer(squadra,formazione,numGiocatoriPerPosizio
                       Portiere:ris/(numGiocatoriPerPosizione["Portiere"]-formazione["Portiere"])};
   var club={Pace:0,Passing:0,Defending:0,Shooting:0,Dribbling:0,Physical:0};
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
-
+  var giocatori=[];
   squadra.forEach(function(d,i){
     if(d["PositionRule"]=="Portiere"){
       var player=sixSkillGenerateForClubPortiere(d);
@@ -138,6 +139,8 @@ function sixSkillGenerateForEachPlayer(squadra,formazione,numGiocatoriPerPosizio
     }
     player["Name"]=d["Name"];
     player["PositionRule"]=d["PositionRule"];
+    player["Club"]=d["Club"];
+    player["Position"]=d["Position"];
     var posizione=player["PositionRule"];
     if(formazione[posizione]>0){
       var titolare=true;
@@ -145,15 +148,22 @@ function sixSkillGenerateForEachPlayer(squadra,formazione,numGiocatoriPerPosizio
     }else{
       var titolare=false;
     }
+
     attribute.forEach(function(d,i){
       if(titolare){
-        club[d]+=player[d]*percentualeTitolari[posizione]*cfgPonderazioneSkill[d][posizione]
+        club[d]+=player[d]*percentualeTitolari[posizione]*cfgPonderazioneSkill[d][posizione];
+        player[d]=player[d]*percentualeTitolari[posizione]*cfgPonderazioneSkill[d][posizione];
+        player["Contribuzione"]="titolare";
       }else{
-        club[d]+=player[d]*percentualeRiserve[posizione]*cfgPonderazioneSkill[d][posizione]
+        club[d]+=player[d]*percentualeRiserve[posizione]*cfgPonderazioneSkill[d][posizione];
+        player[d]=player[d]*percentualeRiserve[posizione]*cfgPonderazioneSkill[d][posizione];
+        player["Contribuzione"]="riserva";
       }
     });
+    giocatori.push(player);
   });
-  return club;
+  console.log(giocatori);
+  return [club,giocatori];
 }
 
 /*mi trova la posizione di un giocatore in termini se è un attaccante, centrocampista, difensore o Portiere
@@ -162,9 +172,9 @@ input:
   morePosition: è un booleano che indica true se nell'attributo Position si trovano piu posizioni preferite false se c'è solo 1 posizione.
 */
 function calcoloPosizione(player,morePosition){
-  var posizioni_attacco=['LS','ST','RS','LW','LF','CF','RF','RW']
-  var posizioni_centrocampo=['LAM','CAM','RAM','LM','LCM','CM','RCM','RM']
-  var posizioni_difesa=['LWB','LDM','CDM','RDM','RWB','LB','LCB','CB','RCB','RB']
+  var posizioni_attacco=['LS','ST','RS','LW','LF','CF','RF','RW','LM','RM']
+  var posizioni_centrocampo=['LAM','CAM','RAM','LCM','CM','RCM','CDM','LDM','RDM']
+  var posizioni_difesa=['LWB','RWB','LB','LCB','CB','RCB','RB']
   var posizioni_portiere=['GK']
   var posizione_campo=["Attaccante","Centrocampista","Difensore","Portiere"]
   var posizioni=[posizioni_attacco,posizioni_centrocampo,posizioni_difesa,posizioni_portiere]

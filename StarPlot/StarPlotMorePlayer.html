@@ -31,20 +31,20 @@
    <body>
 
      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-       <a class="navbar-brand" href="#">Star Plot Players</a>
+       <a class="navbar-brand" href="#">Star Plot More Player</a>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
        <div class="collapse navbar-collapse" id="navbarCollapse">
          <ul class="navbar-nav mr-auto">
-           <li class="nav-item active">
-             <a class="nav-link" href="StarPlotPlayers.html">Players <span class="sr-only">(current)</span></a>
+           <li class="nav-item">
+             <a class="nav-link" href="StarPlotPlayers.html">Players </a>
            </li>
            <li class="nav-item">
              <a class="nav-link" href="StarPlotTeam.html">Teams </a>
            </li>
-           <li class="nav-item">
-             <a class="nav-link" href="StarPlotMorePlayer.html">More Player </a>
+           <li class="nav-item active">
+             <a class="nav-link" href="StarPlotMorePlayer.html">Teams Storico <span class="sr-only">(current)</span></a>
            </li>
          </ul>
        </div>
@@ -54,14 +54,14 @@
       <div id = "svgcontainer">
       </div>
 
-      <script type="text/javascript" src="manipolazioneDatiPlayer.js"></script>
+      <script type="text/javascript" src="ManipolazioneDatiMorePlayer.js"></script>
 
       <form name="myform" onSubmit="return handleClick()">
           <div class='selettori'>
-            <label for="username">Player 1</label>
+            <label for="username">Team 1</label>
             <input type="text" class="form-control" id="myVal1" placeholder="Add some text&hellip;" value="" required="">
           </br>
-            <label for="username">Player 2</label>
+            <label for="username">Team 2</label>
             <input type="text" class="form-control" id="myVal2" placeholder="Add some text&hellip;" value="" required="">
           </br>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Ok</button>

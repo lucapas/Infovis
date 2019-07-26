@@ -1,6 +1,6 @@
 //per poter eseguire questo codice bisogna seguire il primo metodo spiegato in questo sito per firefox: http://testingfreak.com/how-to-fix-cross-origin-request-security-cors-error-in-firefox-chrome-and-ie/
-dataset_url="dataFifa2019.csv";
-dataset_url_match="ClassificaSeriaA2019.csv";
+dataset_url_19="dataFifa2019.csv";
+dataset_url_18="dataFifa2018.csv";
 //sono le configurazioni dello star plot
 var cfgStarPlot = {
  w: 300,
@@ -36,26 +36,26 @@ var cfgListSuggerimenti = {
 };
 
 
-//creazione dello starplot con inputi i 2 player da confrontare
-function createStarlPlot(data,nameClub1,nameClub2){
-  players=listOfPlayerIntoStarPlot(data,nameClub1,nameClub2);
+
+//creazione dello starplot con input i 2 player da confrontare
+function createStarlPlot(data_19,data_18,nameClub1,nameClub2){
+  players=listOfPlayerIntoStarPlot(data_19,data_18,nameClub1,nameClub2);
   var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
   var formazione2={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
   var club1=sixSkillGenerateForEachPlayer(players[0],formazione1,players[2]);
   var club2=sixSkillGenerateForEachPlayer(players[1],formazione2,players[3]);
   var legendOptions = [];
-  legendOptions.push(nameClub1);
-  legendOptions.push(nameClub2);
+  legendOptions.push(nameClub1+" 2019");
+  legendOptions.push(nameClub2+" 2018");
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
   StarPlot.legenda(legendOptions,cfgLegend);
   StarPlot.starPlot(cfgStarPlot,creaSintassiPerStarPlot(club1[0]),creaSintassiPerStarPlot(club2[0]),attribute,legendOptions,cfgLegend);
 }
 
 //crezione del primo starplot di partenza
-d3.csv(dataset_url, function(data) {
-  d3.csv(dataset_url_match, function(data2) {
-    console.log(data2);
-    createStarlPlot(data,data[0]["Club"],data[1]["Club"]);
+d3.csv(dataset_url_19, function(data_19) {
+  d3.csv(dataset_url_18, function(data_18) {
+    createStarlPlot(data_19,data_18,data_19[0]["Club"],data_18[0]["Club"]);
   });
 });
 
@@ -67,19 +67,21 @@ output:
   playersClub1 e playersClub2: lista dei giocatori dei club
   numeroDiGiocatoriClub1 e numeroDiGiocatoriClub2: dizionario con 4 elementi che indicano il numero dei giocatori per ogni posizione
 */
-function listOfPlayerIntoStarPlot(data, team1, team2){
+function listOfPlayerIntoStarPlot(data_19 ,data_18, team1, team2){
   var playersClub1=[];
   var playersClub2=[];
   var numeroDiGiocatoriClub1={Attaccante: 0, Centrocampista:0, Difensore:0, Portiere:0}
   var numeroDiGiocatoriClub2={Attaccante: 0, Centrocampista:0, Difensore:0, Portiere:0}
-  data.forEach(function(d,i){
+  data_19.forEach(function(d,i){
     if(d["Club"]==team1){
       posizione=calcoloPosizione(d,false);
       playersClub1.push(d);
       numeroDiGiocatoriClub1[posizione]+=1
     }
+  });
+  data_18.forEach(function(d,i){
     if(d["Club"]==team2){
-      posizione=calcoloPosizione(d,false);
+      posizione=calcoloPosizione(d,true);
       playersClub2.push(d);
       numeroDiGiocatoriClub2[posizione]+=1
     }
@@ -88,19 +90,17 @@ function listOfPlayerIntoStarPlot(data, team1, team2){
 }
 
 
-
 //funzione che parte quando si clicca sulla ricerca
 function handleClick(event){
-
-  //cerco i giocatori nel dataset
-  d3.csv(dataset_url, function(data) {
+d3.csv(dataset_url_19, function(data_19) {
+  d3.csv(dataset_url_18, function(data_18) {
     squadra1=document.getElementById("myVal1").value.toUpperCase();
     squadra2=document.getElementById("myVal2").value.toUpperCase();
     d3.selectAll("svg").remove();
     d3.selectAll(".listOfPlayer").remove();
-    //infine creo lo starplot
-    createStarlPlot(data,search(data,squadra1,0),search(data,squadra2,cfgListSuggerimenti.width+10));
-
+    //creo lo starplot
+    createStarlPlot(data_19,data_18,search(data_19,squadra1,0),search(data_18,squadra2,cfgListSuggerimenti.width+10));
+    });
   });
   return false;
 };
