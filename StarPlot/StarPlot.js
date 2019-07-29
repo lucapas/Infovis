@@ -1,4 +1,10 @@
 //creo lo StarPlot
+    
+function handleClickOnPlayer(){
+  let playerNameAndClub = d3.select(this);
+  console.log(this);
+}
+
 
 var StarPlot =
 {
@@ -32,6 +38,7 @@ var StarPlot =
 	  //Initiate Legend
 	  var legend = svg.append("g")
 	  	.attr("class", "legend")
+      .attr("pointer-events", "auto")
 	  	.attr("height", cfg.h)
 	  	.attr("width", cfg.w-100)
 	  	.attr('transform', 'translate(90,20)')
@@ -52,6 +59,8 @@ var StarPlot =
 	  	  .data(legendOptions)
 	  	  .enter()
 	  	  .append("text")
+        .attr("class", "player-name")
+        .on("click", function(){handleClickOnPlayer.call(this)})
 	  	  .attr("x", cfg.w - 352)
 	  	  .attr("y", function(d, i){ return i * 20 + 9;})
 	  	  .attr("font-size", "11px")
@@ -61,6 +70,7 @@ var StarPlot =
 	},
 
 	starPlot:function(cfg,player1,player2,attribute,legendOptions,cfgLegend){
+
     //metto gli input in variabili apposite
     var allAxis=attribute;
     var players=[player1,player2];

@@ -40,7 +40,7 @@ var cfgListSuggerimenti = {
 function createStarlPlot(startPlayer1,startPlayer2){
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
   var legendOptions = [];
-  legendOptions.push(startPlayer1["Name"]);
+  legendOptions.push(startPlayer1["Name"] + " (" + startPlayer1["Club"] + ")");
   var player1=[];
   console.log(startPlayer2);
   player1.push({axis:"Pace",value:pace(startPlayer1["SprintSpeed"],startPlayer1["Acceleration"])});
@@ -50,7 +50,7 @@ function createStarlPlot(startPlayer1,startPlayer2){
   player1.push({axis:"Dribbling",value:dribbling(startPlayer1["Dribbling"],startPlayer1["BallControl"],startPlayer1["Agility"],startPlayer1["Balance"])});
   player1.push({axis:"Physical",value:physical(startPlayer1["Strength"],startPlayer1["Stamina"],startPlayer1["Aggression"],startPlayer1["Jumping"])});
 
-  legendOptions.push(startPlayer2["Name"]);
+  legendOptions.push(startPlayer2["Name"] + " (" + startPlayer2["Club"] + ")");
 
   StarPlot.legenda(legendOptions,cfgLegend);
   var player2=[];
@@ -138,6 +138,17 @@ function handleClick(event){
 
     //infine creo lo starplot
     createStarlPlot(player1,player2);
+
+    /*attach a click handler to player names in the starplot legend*/
+    d3.selectAll(".player-name")
+     .on("click", function(){
+      handleClickOnPlayer.call(this)
+    });
+
+    function handleClickOnPlayer(){
+      let playerNameAndClub = d3.select(this);
+      console.log(this);
+    }
     /*d3.selectAll("svg").remove();
     var attribute=["difesa","centrocampista","attaccante"];
     var player1=[];
