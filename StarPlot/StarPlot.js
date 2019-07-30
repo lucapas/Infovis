@@ -3,6 +3,14 @@
 function handleClickOnPlayer(){
   let playerNameAndClub = d3.select(this);
   console.log(this);
+
+  if(playerNameAndClub.attr("fill") === "blue"){
+    playerNameAndClub.attr("fill", "#737373");
+    console.log(d3.select(".star"));
+  }
+  else{
+    playerNameAndClub.attr("fill", "blue");
+  }
 }
 
 
