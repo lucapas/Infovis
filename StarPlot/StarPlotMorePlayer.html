@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <script type = "text/javascript" src = "https://d3js.org/d3.v4.min.js"></script>
-      <script src="StarPlot.js"></script>
+      <script src="StarPlotMorePlayers.js"></script>
       <script src="utils.js"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <style>
@@ -17,13 +17,13 @@
         #svglegend{
           position: absolute;
      		  top: 100px;
-     		  left: 10px;
+     		  left: 100px;
           width: 200px;
         }
         #star{
           position: absolute;
      		  top: 100px;
-     		  left: 10px;
+     		  left: 100px;
         }
 
       </style>
@@ -45,7 +45,7 @@
              <a class="nav-link" href="StarPlotTeam.html">Teams </a>
            </li>
            <li class="nav-item active">
-             <a class="nav-link" href="StarPlotMorePlayer.html">Teams Storico <span class="sr-only">(current)</span></a>
+             <a class="nav-link" href="StarPlotMorePlayer.html">Players Team <span class="sr-only">(current)</span></a>
            </li>
          </ul>
        </div>
@@ -59,11 +59,8 @@
 
       <form name="myform" onSubmit="return handleClick()">
           <div class='selettori'>
-            <label for="username">Team 1</label>
+            <label for="username">Team</label>
             <input type="text" class="form-control" id="myVal1" placeholder="Add some text&hellip;" value="" required="">
-          </br>
-            <label for="username">Team 2</label>
-            <input type="text" class="form-control" id="myVal2" placeholder="Add some text&hellip;" value="" required="">
           </br>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Ok</button>
           </div>

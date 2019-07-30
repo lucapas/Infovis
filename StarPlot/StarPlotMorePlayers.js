@@ -1,6 +1,6 @@
 //creo lo StarPlot
 
-var StarPlot =
+var StarPlotMorePlayers =
 {
 	////////////////////////////////////////////
 	/////////// Initiate legend ////////////////
@@ -60,10 +60,9 @@ var StarPlot =
 	  	  ;
 	},
 
-	starPlot:function(cfg,player1,player2,attribute,legendOptions,cfgLegend){
+	starPlot:function(cfg,players,attribute,legendOptions,cfgLegend){
     //metto gli input in variabili apposite
     var allAxis=attribute;
-    var players=[player1,player2];
 
     //creo variabili che mi servono per fare i calcoli della posizione dei vari assi
   	var maxValue = cfg.maxValue;
@@ -208,21 +207,7 @@ var StarPlot =
       										svg.selectAll("polygon")
       										 .transition(200)
       										 .style("fill-opacity", cfg.opacityArea);
-      					 })
-                 .on("click", function(d,i){
-           					d3.select(".radar-chart-serie0").remove();
-                    d3.select(".radar-chart-serie1").remove();
-                    var players_invert=[players_conf[1],players_conf[0]];
-                    poligoni(players_invert);
-										if(cfgLegend.legendInvert){
-											var players_invert_legend=[legendOptions[1],legendOptions[0]];
-											cfgLegend.legendInvert=false;
-										}else{
-											var players_invert_legend=[legendOptions[0],legendOptions[1]];
-											cfgLegend.legendInvert=true;
-										}
-										StarPlot.legenda(players_invert_legend,cfgLegend);
-                });
+      					 });
       	  series++;
       	});
       }

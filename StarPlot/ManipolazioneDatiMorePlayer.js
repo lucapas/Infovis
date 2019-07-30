@@ -1,6 +1,5 @@
 //per poter eseguire questo codice bisogna seguire il primo metodo spiegato in questo sito per firefox: http://testingfreak.com/how-to-fix-cross-origin-request-security-cors-error-in-firefox-chrome-and-ie/
-dataset_url_19="dataFifa2019.csv";
-dataset_url_18="dataFifa2018.csv";
+dataset="dataFifa2019.csv";
 //sono le configurazioni dello star plot
 var cfgStarPlot = {
  w: 300,
@@ -20,7 +19,7 @@ var cfgStarPlot = {
 //sono le configurazione della legenda
 var cfgLegend = {
  w: 300,
- h: 100,
+ h: 250,
  top: 100,//traslazione della legenda rispetto l'asse y
  left: 10,//traslazione della legenda rispetto l'asse x
  width: 200,// grandezza del div e non della legenda
@@ -38,25 +37,28 @@ var cfgListSuggerimenti = {
 
 
 //creazione dello starplot con input i 2 player da confrontare
-function createStarlPlot(data_19,data_18,nameClub1,nameClub2){
-  players=listOfPlayerIntoStarPlot(data_19,data_18,nameClub1,nameClub2);
+function createStarlPlot(data,nameClub1){
   var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
-  var formazione2={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
-  var club1=sixSkillGenerateForEachPlayer(players[0],formazione1,players[2]);
-  var club2=sixSkillGenerateForEachPlayer(players[1],formazione2,players[3]);
+  var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+  players=listOfPlayerIntoStarPlotOneTeam(data,nameClub1,formazione1);
+  var club1=sixSkillGenerateForEachPlayerOneTeam(players,formazione_ripetuta);
   var legendOptions = [];
-  legendOptions.push(nameClub1+" 2019");
-  legendOptions.push(nameClub2+" 2018");
+  club1.forEach(function(d,i){
+    legendOptions.push(d["Name"]);
+  });
+  var i;
+  var legendOptionsInvert=[];
+  for (i = legendOptions.length-1; i >= 0; i--) {
+    legendOptionsInvert.push(legendOptions[i]);
+  }
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
-  StarPlot.legenda(legendOptions,cfgLegend);
-  StarPlot.starPlot(cfgStarPlot,creaSintassiPerStarPlot(club1[0]),creaSintassiPerStarPlot(club2[0]),attribute,legendOptions,cfgLegend);
+  StarPlotMorePlayers.legenda(legendOptionsInvert,cfgLegend);
+  StarPlotMorePlayers.starPlot(cfgStarPlot,creaSintassiPerStarPlotMorePlayers(club1,attribute),attribute,legendOptionsInvert,cfgLegend);
 }
 
 //crezione del primo starplot di partenza
-d3.csv(dataset_url_19, function(data_19) {
-  d3.csv(dataset_url_18, function(data_18) {
-    createStarlPlot(data_19,data_18,data_19[0]["Club"],data_18[0]["Club"]);
-  });
+d3.csv(dataset, function(data) {
+  createStarlPlot(data,data[0]["Club"]);
 });
 
 /*mi cerca tutti i giocatori di un club
@@ -67,40 +69,73 @@ output:
   playersClub1 e playersClub2: lista dei giocatori dei club
   numeroDiGiocatoriClub1 e numeroDiGiocatoriClub2: dizionario con 4 elementi che indicano il numero dei giocatori per ogni posizione
 */
-function listOfPlayerIntoStarPlot(data_19 ,data_18, team1, team2){
+function listOfPlayerIntoStarPlotOneTeam(data, team1, formazione1){
   var playersClub1=[];
-  var playersClub2=[];
-  var numeroDiGiocatoriClub1={Attaccante: 0, Centrocampista:0, Difensore:0, Portiere:0}
-  var numeroDiGiocatoriClub2={Attaccante: 0, Centrocampista:0, Difensore:0, Portiere:0}
-  data_19.forEach(function(d,i){
+  data.forEach(function(d,i){
     if(d["Club"]==team1){
       posizione=calcoloPosizione(d,false);
-      playersClub1.push(d);
-      numeroDiGiocatoriClub1[posizione]+=1
+      if(formazione1[posizione]>0){
+        playersClub1.push(d);
+        formazione1[posizione]-=1;
+      }
     }
   });
-  data_18.forEach(function(d,i){
-    if(d["Club"]==team2){
-      posizione=calcoloPosizione(d,true);
-      playersClub2.push(d);
-      numeroDiGiocatoriClub2[posizione]+=1
-    }
-  });
-  return [playersClub1,playersClub2,numeroDiGiocatoriClub1,numeroDiGiocatoriClub2]
+  return playersClub1
 }
 
+function sixSkillGenerateForEachPlayerOneTeam(squadra,formazione){
+  var club={Pace:0,Passing:0,Defending:0,Shooting:0,Dribbling:0,Physical:0};
+  var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
+  var giocatori=[];
+  squadra.forEach(function(d,i){
+    if(d["PositionRule"]=="Portiere"){
+      var player=sixSkillGenerateForClubPortiere(d);
+    }else{
+      var player=sixSkillGenerateForClub(d);
+    }
+    player["Name"]=d["Name"];
+    player["PositionRule"]=d["PositionRule"];
+    player["Club"]=d["Club"];
+    player["Position"]=d["Position"];
+    player["ContributoTeam"]={};
+    var posizione=player["PositionRule"];
+    attribute.forEach(function(d,i){
+      club[d]+=player[d]*cfgPonderazioneSkill[d][posizione]/formazione[posizione];
+      player[d]=player[d]*cfgPonderazioneSkill[d][posizione]/formazione[posizione];
+      player["ContributoTeam"][d]=club[d];
+    });
+    giocatori.push(player);
+  });
+  console.log(giocatori);
+  return giocatori;
+}
+
+function creaSintassiPerStarPlotMorePlayers(club,attribute){
+  var players=[];
+  club.forEach(function(d,i){
+    var player1=[];
+    attribute.forEach(function(a,j){
+      player1.push({axis:a, value:d["ContributoTeam"][a], name:d["Name"]});
+    });
+    players.push(player1);
+  });
+  var i;
+  var invert=[];
+  for (i = players.length-1; i >= 0; i--) {
+    invert.push(players[i]);
+  }
+  console.log(invert);
+  return invert;
+}
 
 //funzione che parte quando si clicca sulla ricerca
 function handleClick(event){
-d3.csv(dataset_url_19, function(data_19) {
-  d3.csv(dataset_url_18, function(data_18) {
-    squadra1=document.getElementById("myVal1").value.toUpperCase();
-    squadra2=document.getElementById("myVal2").value.toUpperCase();
-    d3.selectAll("svg").remove();
-    d3.selectAll(".listOfPlayer").remove();
-    //creo lo starplot
-    createStarlPlot(data_19,data_18,search(data_19,squadra1,0),search(data_18,squadra2,cfgListSuggerimenti.width+10));
-    });
+d3.csv(dataset, function(data) {
+  squadra1=document.getElementById("myVal1").value.toUpperCase();
+  d3.selectAll("svg").remove();
+  d3.selectAll(".listOfPlayer").remove();
+  //creo lo starplot
+  createStarlPlot(data,search(data,squadra1,100));
   });
   return false;
 };
