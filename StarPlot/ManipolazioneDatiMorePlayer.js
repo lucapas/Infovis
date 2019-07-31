@@ -242,7 +242,6 @@ function creaSintassiPerStarPlotMorePlayers(club,attribute){
   }
   console.log(invert);
   return invert;
-  return players;
 }
 
 //funzione che parte quando si clicca sulla ricerca
@@ -252,8 +251,16 @@ d3.csv(dataset, function(data) {
   d3.selectAll("svg").remove();
   d3.selectAll(".listOfPlayer").remove();
   //creo lo starplot
-  var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
-  var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+  var formPostData = $(".myform").serialize();
+  formazione=document.getElementById("formation").value.split("");
+  console.log("-----------------");
+  console.log(squadra1);
+  console.log(formazione);
+  console.log("---------------");
+  var formazione1={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
+  var formazione_ripetuta={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
+  console.log(formazione1);
+  console.log(formazione_ripetuta);
   createStarlPlot(data,search(data,squadra1,100),formazione1,formazione_ripetuta);
   });
   return false;
@@ -263,12 +270,7 @@ function formationClick(event){
 d3.csv(dataset, function(data) {
   d3.selectAll("svg").remove();
   d3.selectAll(".listOfPlayer").remove();
-  var formPostData = $(".needs-validation").serialize().substr(10,100).split("");;
-  var formazione1={Attaccante:parseInt(formPostData[3]), Centrocampista:parseInt(formPostData[2]), Difensore:parseInt(formPostData[1]), Portiere:parseInt(formPostData[0])};
-  var formazione_ripetuta={Attaccante:parseInt(formPostData[3]), Centrocampista:parseInt(formPostData[2]), Difensore:parseInt(formPostData[1]), Portiere:parseInt(formPostData[0])};
-  console.log(formazione1);
-  console.log(formazione_ripetuta);
-  createStarlPlot(data,data[0]["Club"],formazione1,formazione_ripetuta);
+
 });
   return false;
 }
