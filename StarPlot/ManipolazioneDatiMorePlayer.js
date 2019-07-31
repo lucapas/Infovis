@@ -34,18 +34,61 @@ var cfgListSuggerimenti = {
   width: 200,// grandezza della lista
 };
 
-    
+
+// click handler for players's names on the starplot legend    
 function handleClickOnPlayer(){
-  let playerNameAndClub = d3.select(this);
+  let clickedPlayer = d3.select(this);
   console.log(this);
 
-  if(playerNameAndClub.attr("fill") === "blue"){
-    playerNameAndClub.attr("fill", "#737373");
-    console.log(d3.select(".star"));
+  // selected players are those whose fill color is blue
+  let selectedPlayers = d3.selectAll('.legend-text[fill^="blue"]')
+  let selectedPlayersLenght = selectedPlayers.size()
+
+  if(clickedPlayer.attr("fill") === "blue"){
+    clickedPlayer.attr("fill", "#737373");
   }
+
   else{
-    playerNameAndClub.attr("fill", "blue");
+    // if there are two players already selected then de select the first one
+    if(selectedPlayersLenght == 2){
+      let firstSelectedPlayer = d3.select(selectedPlayers.nodes()[0]);
+      firstSelectedPlayer.attr("fill", "#737373");
+    }
+    clickedPlayer.attr("fill", "blue");
   }
+
+  // update selected players list and size
+  selectedPlayers = d3.selectAll('.legend-text[fill^="blue"]');
+  selectedPlayersLenght = selectedPlayers.size();
+
+  //show a link to compare two player (if a user select exactly two players)
+  if(selectedPlayersLenght == 2){
+    console.log("two selected players:")
+
+    let firstPlayerNameAndRole = selectedPlayers.nodes()[0].innerHTML;
+    let firstPlayerName = firstPlayerNameAndRole.substring(0, firstPlayerNameAndRole.indexOf("-") - 1);
+
+    let secondPlayerNameAndRole = selectedPlayers.nodes()[1].innerHTML;
+    let secondPlayerName = secondPlayerNameAndRole.substring(0, secondPlayerNameAndRole.indexOf("-") - 1);
+
+
+    console.log(firstPlayerName);
+    console.log(secondPlayerName);
+
+    let playerComparisonURL = "StarPlotPlayers.html".concat("?firstPlayer=" + encodeURIComponent(firstPlayerName) + "&secondPlayer=" + encodeURIComponent(secondPlayerName))
+
+    // update the link for player comparison
+    d3.select(".confronta-giocatori")
+      .attr("style", "display:inline-block")
+      .attr("href", playerComparisonURL);
+  }
+
+  // hide the link for player comparison
+  else{
+    d3.select(".confronta-giocatori")
+      .attr("style", "display:none");
+  }
+
 }
 
 
@@ -65,6 +108,8 @@ function createStarlPlot(data,nameClub1){
 //crezione del primo starplot di partenza
 d3.csv(dataset, function(data) {
   createStarlPlot(data,data[0]["Club"]);
+  d3.selectAll(".legend-text")
+    .on("click", function(){handleClickOnPlayer.call(this)})
 });
 
 

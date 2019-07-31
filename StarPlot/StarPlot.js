@@ -54,7 +54,6 @@ var StarPlot =
 	  	  .data(legendOptions)
 	  	  .enter()
 	  	  .append("text")
-        .attr("class", "legend-text")
 	  	  .attr("x", cfg.w - 352)
 	  	  .attr("y", function(d, i){ return i * 20 + 9;})
 	  	  .attr("font-size", "11px")

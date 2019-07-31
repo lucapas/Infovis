@@ -32,6 +32,7 @@ var StarPlotMorePlayers =
 	  //Initiate Legend
 	  var legend = svg.append("g")
 	  	.attr("class", "legend")
+      .attr("pointer-events", "auto")
 	  	.attr("height", cfg.h)
 	  	.attr("width", cfg.w-100)
 	  	.attr('transform', 'translate(90,20)')
@@ -56,7 +57,9 @@ var StarPlotMorePlayers =
 	  	  .attr("x", cfg.w - 352)
 	  	  .attr("y", function(d, i){ return i * 20 + 9;})
 	  	  .attr("font-size", "11px")
+        .attr("class", "legend-text")
 	  	  .attr("fill", "#737373")
+
 	  	  .text(function(d) { return d; })
 	  	  ;
 	},

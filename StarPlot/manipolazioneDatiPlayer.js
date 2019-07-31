@@ -73,12 +73,41 @@ function createStarlPlot(startPlayer1,startPlayer2){
 
 //crezione del primo starplot di partenza
 d3.csv(dataset_url, function(data) {
-  createStarlPlot(data[0],data[1]);
 
-  let firstPlayerTeamName = data[0]["Club"];
-  let secondPlayerTeamName = data[1]["Club"];
-  
-  updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
+  let urlParams = new URLSearchParams(window.location.search);
+  let firstPlayerName = urlParams.get('firstPlayer');
+  let secondPlayerName = urlParams.get('secondPlayer');
+
+  // first case: reaching this page through the navbar
+  if(firstPlayerName == null && secondPlayerName == null){
+    createStarlPlot(data[0],data[1]);
+    let firstPlayerTeamName = data[0]["Club"];
+    let secondPlayerTeamName = data[1]["Club"];
+    updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
+  }
+
+  // compare players given in the query params
+  else {
+    let listOfPlayers1 = searchPlayer(data, firstPlayerName.toUpperCase());
+    let listOfPlayer1 = listOfPlayers1[0];
+    let listOfPlayerStarPlot1 = listOfPlayers1[1];
+
+    let listOfPlayers2 = searchPlayer(data, secondPlayerName.toUpperCase());
+    let listOfPlayer2 = listOfPlayers2[0];
+    let listOfPlayerStarPlot2 = listOfPlayers2[1];
+
+    let player1 = listOfPlayerStarPlot1[0];
+    let player2 = listOfPlayerStarPlot2[0];
+
+    createStarlPlot(player1, player2);
+
+    let firstPlayerTeamName = player1["Club"];
+    let secondPlayerTeamName = player2["Club"];
+
+    updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
+
+  }
+
 });
 
 /*funzione che ricerca un giocatore,
