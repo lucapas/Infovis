@@ -107,7 +107,18 @@ function createStarlPlot(data,nameClub1,formazione1,formazione_ripetuta){
 d3.csv(dataset, function(data) {
   var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
   var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
-  createStarlPlot(data,data[0]["Club"],formazione1,formazione_ripetuta);
+
+  let urlParams = new URLSearchParams(window.location.search);
+  let clubName = urlParams.get('team');
+
+  if(clubName == null){
+    createStarlPlot(data,data[0]["Club"],formazione1,formazione_ripetuta);
+  }
+
+  else{
+    createStarlPlot(data,clubName,formazione1,formazione_ripetuta);
+  }
+  
   d3.selectAll(".legend-text")
     .on("click", function(){handleClickOnPlayer.call(this)})
 });

@@ -51,6 +51,18 @@ function createStarlPlot(data,nameClub1,nameClub2){
   StarPlot.starPlot(cfgStarPlot,creaSintassiPerStarPlot(club1[0]),creaSintassiPerStarPlot(club2[0]),attribute,legendOptions,cfgLegend);
 }
 
+
+function updateLinkForTop11Comparison(firstTeamName, secondTeamName){
+  let top11URLPrefix = "StarPlotMorePlayer.html?team=";
+
+  d3.select(".confronta-top-11-1")
+    .attr("href", top11URLPrefix.concat(encodeURIComponent(firstTeamName)))
+
+  d3.select(".confronta-top-11-2")
+    .attr("href", top11URLPrefix.concat(encodeURIComponent(secondTeamName)));
+}
+
+
 //crezione del primo starplot di partenza
 d3.csv(dataset_url, function(data) {
   d3.csv(dataset_url_match, function(data2) {
@@ -64,11 +76,13 @@ d3.csv(dataset_url, function(data) {
     // first case: reaching this page through the navbar
     if(firstClubName == null && secondClubName == null){
       createStarlPlot(data, data[0]["Club"], data[1]["Club"]);
+      updateLinkForTop11Comparison(data[0]["Club"], data[1]["Club"]);
     }
 
     // second case: reaching this page through the team comparing link in StarPlotPlayers.html
     else {
       createStarlPlot(data, firstClubName, secondClubName);
+      updateLinkForTop11Comparison(firstClubName, secondClubName);
     }
   });
 });
