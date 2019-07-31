@@ -19,7 +19,7 @@ var cfgStarPlot = {
 //sono le configurazione della legenda
 var cfgLegend = {
  w: 300,
- h: 100,
+ h: 70,
  top: 100,//traslazione della legenda rispetto l'asse y
  left: 10,//traslazione della legenda rispetto l'asse x
  width: 200,// grandezza del div e non della legenda
