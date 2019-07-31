@@ -35,6 +35,13 @@ var cfgListSuggerimenti = {
 };
 
 
+// function which update a link for comparing players' respective clubs
+function updateLinkForTeamComparison(firstTeamName, secondTeamName){
+  let teamComparisonURL = "StarPlotTeam.html".concat("?firstTeam=" + encodeURIComponent(firstTeamName) + "&secondTeam=" + encodeURIComponent(secondTeamName))
+  d3.select(".confronta-squadre")
+    .attr("href", teamComparisonURL)
+}
+
 
 //creazione dello starplot con input i 2 player da confrontare
 function createStarlPlot(startPlayer1,startPlayer2){
@@ -67,6 +74,11 @@ function createStarlPlot(startPlayer1,startPlayer2){
 //crezione del primo starplot di partenza
 d3.csv(dataset_url, function(data) {
   createStarlPlot(data[0],data[1]);
+
+  let firstPlayerTeamName = data[0]["Club"];
+  let secondPlayerTeamName = data[1]["Club"];
+  
+  updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
 });
 
 /*funzione che ricerca un giocatore,
@@ -143,13 +155,7 @@ function handleClick(event){
     let firstPlayerTeamName = player1["Club"];
     let secondPlayerTeamName = player2["Club"];
 
-    let teamComparisonURL = "StarPlotTeam.html".concat("?firstTeam=" + encodeURIComponent(firstPlayerTeamName) + "&secondTeam=" + encodeURIComponent(secondPlayerTeamName))
-
-    d3.select("#star")
-      .append("a")
-      .attr("class", "btn btn-primary btn-sm confronta-squadre")
-      .attr("href", teamComparisonURL)
-      .text("Confronta team");
+    updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
 
     /*d3.selectAll("svg").remove();
     var attribute=["difesa","centrocampista","attaccante"];
