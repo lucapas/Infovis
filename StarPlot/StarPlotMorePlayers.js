@@ -172,6 +172,7 @@ var StarPlotMorePlayers =
       //series mi serve per variare il colore
       function poligoni(players_conf){
         var series=0
+				var col="";
         players_conf.forEach(function(player, x){
       	  svg.selectAll(".area")
       					 .data([player])
@@ -201,9 +202,10 @@ var StarPlotMorePlayers =
       					 .style("fill-opacity", cfg.opacityArea)
       					 .on('mouseover', function (d,i){
       										z = "polygon."+d3.select(this).attr("class");
+													col=d3.select("#player"+d3.select(this).attr("number"))
+													.attr("fill");
 													d3.select("#player"+d3.select(this).attr("number"))
 													.attr("fill", "red");
-
       										svg.selectAll("polygon")
       										 .transition(200)
       										 .style("fill-opacity", 0.1);
@@ -216,7 +218,7 @@ var StarPlotMorePlayers =
       										 .transition(200)
       										 .style("fill-opacity", cfg.opacityArea);
 												 d3.select("#player"+d3.select(this).attr("number"))
-													.attr("fill", "#737373");
+													.attr("fill", col);
       					 });
       	  series++;
       	});
