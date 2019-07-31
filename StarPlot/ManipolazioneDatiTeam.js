@@ -55,7 +55,10 @@ function createStarlPlot(data,nameClub1,nameClub2){
 d3.csv(dataset_url, function(data) {
   d3.csv(dataset_url_match, function(data2) {
     console.log(data2);
-    createStarlPlot(data,data[0]["Club"],data[1]["Club"]);
+    let urlParams = new URLSearchParams(window.location.search);
+    let firstClubName = urlParams.get('firstTeam');
+    let secondClubName = urlParams.get('secondTeam');
+    createStarlPlot(data, firstClubName, secondClubName);
   });
 });
 
