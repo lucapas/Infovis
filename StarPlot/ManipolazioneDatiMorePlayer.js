@@ -20,7 +20,7 @@ var cfgStarPlot = {
 var cfgLegend = {
  w: 300,
  h: 250,
- top: 100,//traslazione della legenda rispetto l'asse y
+ top: 60,//traslazione della legenda rispetto l'asse y
  left: 10,//traslazione della legenda rispetto l'asse x
  width: 200,// grandezza del div e non della legenda
  color: d3.scaleOrdinal(d3.schemeCategory10),
@@ -41,25 +41,19 @@ function createStarlPlot(data,nameClub1){
   var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
   var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
   players=listOfPlayerIntoStarPlotOneTeam(data,nameClub1,formazione1);
-  var club1=sixSkillGenerateForEachPlayerOneTeam(players,formazione_ripetuta);
-  var legendOptions = [];
-  club1.forEach(function(d,i){
-    legendOptions.push(d["Name"]);
-  });
-  var i;
-  var legendOptionsInvert=[];
-  for (i = legendOptions.length-1; i >= 0; i--) {
-    legendOptionsInvert.push(legendOptions[i]);
-  }
+  var club1=sixSkillGenerateForEachPlayerOneTeam(orderPlayer(players),formazione_ripetuta);
+  var legendOptions = insertPlayer(club1);
+
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
-  StarPlotMorePlayers.legenda(legendOptionsInvert,cfgLegend);
-  StarPlotMorePlayers.starPlot(cfgStarPlot,creaSintassiPerStarPlotMorePlayers(club1,attribute),attribute,legendOptionsInvert,cfgLegend);
+  StarPlotMorePlayers.legenda(legendOptions,cfgLegend);
+  StarPlotMorePlayers.starPlot(cfgStarPlot,creaSintassiPerStarPlotMorePlayers(club1,attribute),attribute,legendOptions,cfgLegend);
 }
 
 //crezione del primo starplot di partenza
 d3.csv(dataset, function(data) {
   createStarlPlot(data,data[0]["Club"]);
 });
+
 
 /*mi cerca tutti i giocatori di un club
 input:
@@ -110,6 +104,62 @@ function sixSkillGenerateForEachPlayerOneTeam(squadra,formazione){
   return giocatori;
 }
 
+function insertPlayer(club1){
+  var legendOptions=[0,1,2,3,4,5,6,7,8,9,10];
+  var portiere=0;
+  var difensore=4;
+  var centrocampista=7;
+  var attaccante=10;
+  club1.forEach(function(d,i){
+    if(d["PositionRule"]=="Attaccante"){
+      legendOptions[attaccante]=d["Name"]+" - "+d["PositionRule"];
+      attaccante-=1;
+    }
+    if(d["PositionRule"]=="Centrocampista"){
+      legendOptions[centrocampista]=d["Name"]+" - "+d["PositionRule"];
+      centrocampista-=1;
+    }
+    if(d["PositionRule"]=="Difensore"){
+      legendOptions[difensore]=d["Name"]+" - "+d["PositionRule"];
+      difensore-=1;
+    }
+    if(d["PositionRule"]=="Portiere"){
+      legendOptions[portiere]=d["Name"]+" - "+d["PositionRule"];
+      portiere-=1;
+    }
+  });
+  console.log(legendOptions)
+  return legendOptions;
+}
+
+function orderPlayer(club1){
+  var players=[0,1,2,3,4,5,6,7,8,9,10];
+  var portiere=10;
+  var difensore=9;
+  var centrocampista=5;
+  var attaccante=2;
+  club1.forEach(function(d,i){
+    if(d["PositionRule"]=="Attaccante"){
+      players[attaccante]=d;
+      attaccante-=1;
+    }
+    if(d["PositionRule"]=="Centrocampista"){
+      players[centrocampista]=d;
+      centrocampista-=1;
+    }
+    if(d["PositionRule"]=="Difensore"){
+      players[difensore]=d;
+      difensore-=1;
+    }
+    if(d["PositionRule"]=="Portiere"){
+      players[portiere]=d;
+      portiere-=1;
+    }
+  });
+  console.log(players)
+  return players;
+}
+
 function creaSintassiPerStarPlotMorePlayers(club,attribute){
   var players=[];
   club.forEach(function(d,i){
@@ -126,6 +176,7 @@ function creaSintassiPerStarPlotMorePlayers(club,attribute){
   }
   console.log(invert);
   return invert;
+  return players;
 }
 
 //funzione che parte quando si clicca sulla ricerca

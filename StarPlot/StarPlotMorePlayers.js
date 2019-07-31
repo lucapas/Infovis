@@ -52,6 +52,7 @@ var StarPlotMorePlayers =
 	  	  .data(legendOptions)
 	  	  .enter()
 	  	  .append("text")
+				.attr("id", function(d,i){return "player"+i})
 	  	  .attr("x", cfg.w - 352)
 	  	  .attr("y", function(d, i){ return i * 20 + 9;})
 	  	  .attr("font-size", "11px")
@@ -174,6 +175,7 @@ var StarPlotMorePlayers =
       					 .enter()
       					 .append("polygon")
       					 .attr("class", "radar-chart-serie"+series)
+								 .attr("number",series)
       					 .style("stroke-width", "2px")
       					 .style("stroke", cfg.color(series))
       					 .attr("points",function(d,i){
@@ -194,8 +196,11 @@ var StarPlotMorePlayers =
            				})
       					 .style("fill", function(j, i){return cfg.color(series)})
       					 .style("fill-opacity", cfg.opacityArea)
-      					 .on('mouseover', function (d){
+      					 .on('mouseover', function (d,i){
       										z = "polygon."+d3.select(this).attr("class");
+													d3.select("#player"+d3.select(this).attr("number"))
+													.attr("fill", "red");
+
       										svg.selectAll("polygon")
       										 .transition(200)
       										 .style("fill-opacity", 0.1);
@@ -207,6 +212,8 @@ var StarPlotMorePlayers =
       										svg.selectAll("polygon")
       										 .transition(200)
       										 .style("fill-opacity", cfg.opacityArea);
+												 d3.select("#player"+d3.select(this).attr("number"))
+													.attr("fill", "#737373");
       					 });
       	  series++;
       	});
