@@ -34,6 +34,19 @@ var cfgListSuggerimenti = {
   width: 200,// grandezza della lista
 };
 
+    
+function handleClickOnPlayer(){
+  let playerNameAndClub = d3.select(this);
+  console.log(this);
+
+  if(playerNameAndClub.attr("fill") === "blue"){
+    playerNameAndClub.attr("fill", "#737373");
+    console.log(d3.select(".star"));
+  }
+  else{
+    playerNameAndClub.attr("fill", "blue");
+  }
+}
 
 
 //creazione dello starplot con input i 2 player da confrontare

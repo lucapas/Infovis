@@ -55,10 +55,21 @@ function createStarlPlot(data,nameClub1,nameClub2){
 d3.csv(dataset_url, function(data) {
   d3.csv(dataset_url_match, function(data2) {
     console.log(data2);
+
     let urlParams = new URLSearchParams(window.location.search);
     let firstClubName = urlParams.get('firstTeam');
     let secondClubName = urlParams.get('secondTeam');
-    createStarlPlot(data, firstClubName, secondClubName);
+
+
+    // first case: reaching this page through the navbar
+    if(firstClubName == null && secondClubName == null){
+      createStarlPlot(data, data[0]["Club"], data[1]["Club"]);
+    }
+
+    // second case: reaching this page through the team comparing link in StarPlotPlayers.html
+    else {
+      createStarlPlot(data, firstClubName, secondClubName);
+    }
   });
 });
 

@@ -1,17 +1,4 @@
 //creo lo StarPlot
-    
-function handleClickOnPlayer(){
-  let playerNameAndClub = d3.select(this);
-  console.log(this);
-
-  if(playerNameAndClub.attr("fill") === "blue"){
-    playerNameAndClub.attr("fill", "#737373");
-    console.log(d3.select(".star"));
-  }
-  else{
-    playerNameAndClub.attr("fill", "blue");
-  }
-}
 
 
 var StarPlot =
@@ -67,8 +54,7 @@ var StarPlot =
 	  	  .data(legendOptions)
 	  	  .enter()
 	  	  .append("text")
-        .attr("class", "player-name")
-        .on("click", function(){handleClickOnPlayer.call(this)})
+        .attr("class", "legend-text")
 	  	  .attr("x", cfg.w - 352)
 	  	  .attr("y", function(d, i){ return i * 20 + 9;})
 	  	  .attr("font-size", "11px")
