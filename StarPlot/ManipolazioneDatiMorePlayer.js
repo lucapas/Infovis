@@ -247,30 +247,15 @@ function creaSintassiPerStarPlotMorePlayers(club,attribute){
 //funzione che parte quando si clicca sulla ricerca
 function handleClick(event){
 d3.csv(dataset, function(data) {
-  squadra1=document.getElementById("myVal1").value.toUpperCase();
+  var squadra1=document.getElementById("myVal1").value.toUpperCase();
   d3.selectAll("svg").remove();
   d3.selectAll(".listOfPlayer").remove();
-  //creo lo starplot
-  var formPostData = $(".myform").serialize();
-  formazione=document.getElementById("formation").value.split("");
-  console.log("-----------------");
-  console.log(squadra1);
-  console.log(formazione);
-  console.log("---------------");
+
+  var formazione=document.getElementById("formation").value.split("");
+
   var formazione1={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
   var formazione_ripetuta={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
-  console.log(formazione1);
-  console.log(formazione_ripetuta);
   createStarlPlot(data,search(data,squadra1,100),formazione1,formazione_ripetuta);
   });
   return false;
 };
-
-function formationClick(event){
-d3.csv(dataset, function(data) {
-  d3.selectAll("svg").remove();
-  d3.selectAll(".listOfPlayer").remove();
-
-});
-  return false;
-}
