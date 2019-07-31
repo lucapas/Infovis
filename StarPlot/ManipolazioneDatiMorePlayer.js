@@ -35,7 +35,7 @@ var cfgListSuggerimenti = {
 };
 
 
-// click handler for players's names on the starplot legend    
+// click handler for players's names on the starplot legend
 function handleClickOnPlayer(){
   let clickedPlayer = d3.select(this);
   console.log(this);
@@ -93,12 +93,10 @@ function handleClickOnPlayer(){
 
 
 //creazione dello starplot con input i 2 player da confrontare
-function createStarlPlot(data,nameClub1){
-  var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
-  var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+function createStarlPlot(data,nameClub1,formazione1,formazione_ripetuta){
   players=listOfPlayerIntoStarPlotOneTeam(data,nameClub1,formazione1);
-  var club1=sixSkillGenerateForEachPlayerOneTeam(orderPlayer(players),formazione_ripetuta);
-  var legendOptions = insertPlayer(club1);
+  var club1=sixSkillGenerateForEachPlayerOneTeam(orderPlayer(players,formazione_ripetuta),formazione_ripetuta);
+  var legendOptions = insertPlayer(club1,formazione_ripetuta);
 
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
   StarPlotMorePlayers.legenda(legendOptions,cfgLegend);
@@ -107,7 +105,9 @@ function createStarlPlot(data,nameClub1){
 
 //crezione del primo starplot di partenza
 d3.csv(dataset, function(data) {
-  createStarlPlot(data,data[0]["Club"]);
+  var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+  var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+  createStarlPlot(data,data[0]["Club"],formazione1,formazione_ripetuta);
   d3.selectAll(".legend-text")
     .on("click", function(){handleClickOnPlayer.call(this)})
 });
@@ -162,12 +162,17 @@ function sixSkillGenerateForEachPlayerOneTeam(squadra,formazione){
   return giocatori;
 }
 
-function insertPlayer(club1){
+function insertPlayer(club1,formation){
   var legendOptions=[0,1,2,3,4,5,6,7,8,9,10];
   var portiere=0;
-  var difensore=4;
-  var centrocampista=7;
-  var attaccante=10;
+  var difensore=formation["Difensore"];
+  var centrocampista=formation["Centrocampista"]+difensore;
+  var attaccante=formation["Attaccante"]+centrocampista;
+  console.log("-----------");
+  console.log(formation);
+  console.log(difensore);
+  console.log(centrocampista);
+  console.log(attaccante);
   club1.forEach(function(d,i){
     if(d["PositionRule"]=="Attaccante"){
       legendOptions[attaccante]=d["Name"]+" - "+d["PositionRule"];
@@ -190,12 +195,15 @@ function insertPlayer(club1){
   return legendOptions;
 }
 
-function orderPlayer(club1){
+function orderPlayer(club1,formation){
   var players=[0,1,2,3,4,5,6,7,8,9,10];
   var portiere=10;
-  var difensore=9;
-  var centrocampista=5;
-  var attaccante=2;
+  var attaccante=formation["Attaccante"]-1;
+  var centrocampista=formation["Centrocampista"]+attaccante;
+  var difensore=formation["Difensore"]+centrocampista;
+
+
+
   club1.forEach(function(d,i){
     if(d["PositionRule"]=="Attaccante"){
       players[attaccante]=d;
@@ -244,7 +252,23 @@ d3.csv(dataset, function(data) {
   d3.selectAll("svg").remove();
   d3.selectAll(".listOfPlayer").remove();
   //creo lo starplot
-  createStarlPlot(data,search(data,squadra1,100));
+  var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+  var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+  createStarlPlot(data,search(data,squadra1,100),formazione1,formazione_ripetuta);
   });
   return false;
 };
+
+function formationClick(event){
+d3.csv(dataset, function(data) {
+  d3.selectAll("svg").remove();
+  d3.selectAll(".listOfPlayer").remove();
+  var formPostData = $(".needs-validation").serialize().substr(10,100).split("");;
+  var formazione1={Attaccante:parseInt(formPostData[3]), Centrocampista:parseInt(formPostData[2]), Difensore:parseInt(formPostData[1]), Portiere:parseInt(formPostData[0])};
+  var formazione_ripetuta={Attaccante:parseInt(formPostData[3]), Centrocampista:parseInt(formPostData[2]), Difensore:parseInt(formPostData[1]), Portiere:parseInt(formPostData[0])};
+  console.log(formazione1);
+  console.log(formazione_ripetuta);
+  createStarlPlot(data,data[0]["Club"],formazione1,formazione_ripetuta);
+});
+  return false;
+}

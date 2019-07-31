@@ -16,9 +16,9 @@
      		}
         .selettoriFormazione {
          position: absolute;
-         top: 1000px;
-         left: 1000px;
-         width: 500px;
+         top: 10px;
+         left: 1010px;
+         width: 200px;
        }
         #svglegend{
           position: absolute;
@@ -80,20 +80,27 @@
         </form>
 
       <a class="btn btn-link btn-sm confronta-giocatori" href="#" style="display:none">Confronta</a>
-      </div>
+
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <div class='selettoriFormazione'>
-        <select class="mdb-select md-form" searchable="Search here..">
-          <option value="" disabled selected>Choose your country</option>
-          <option value="1">USA</option>
-          <option value="2">Germany</option>
-          <option value="3">France</option>
-          <option value="3">Poland</option>
-          <option value="3">Japan</option>
-        </select>
+          <form class="needs-validation" onSubmit="return formationClick()">
+          <label for="username">Formazione</label>
+          <select class="custom-select d-block w-100" name="formation">
+            <option value="" disabled selected>Scegli la formazione</option>
+            <option value="1433">4 3 3</option>
+            <option value="1442">4 4 2</option>
+            <option value="1451">4 5 1</option>
+            <option value="1424">4 2 4</option>
+            <option value="1352">3 5 2</option>
+          </select>
+          </br>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Ok</button>
+        </form>
+
+        </div>
         </div>
    </body>
 </html>

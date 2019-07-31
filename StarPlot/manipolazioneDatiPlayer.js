@@ -47,7 +47,7 @@ function updateLinkForTeamComparison(firstTeamName, secondTeamName){
 function createStarlPlot(startPlayer1,startPlayer2){
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
   var legendOptions = [];
-  legendOptions.push(startPlayer1["Name"] + " (" + startPlayer1["Club"] + ")");
+  legendOptions.push(startPlayer1["Name"] + " - "+ calcoloPosizione(startPlayer1,false) + " (" + startPlayer1["Club"] + ")");
   var player1=[];
   console.log(startPlayer2);
   player1.push({axis:"Pace",value:pace(startPlayer1["SprintSpeed"],startPlayer1["Acceleration"])});
@@ -57,7 +57,7 @@ function createStarlPlot(startPlayer1,startPlayer2){
   player1.push({axis:"Dribbling",value:dribbling(startPlayer1["Dribbling"],startPlayer1["BallControl"],startPlayer1["Agility"],startPlayer1["Balance"])});
   player1.push({axis:"Physical",value:physical(startPlayer1["Strength"],startPlayer1["Stamina"],startPlayer1["Aggression"],startPlayer1["Jumping"])});
 
-  legendOptions.push(startPlayer2["Name"]+ " (" + startPlayer2["Club"] + ")");
+  legendOptions.push(startPlayer2["Name"]+ " - "+ calcoloPosizione(startPlayer2,false) + " (" + startPlayer2["Club"] + ")");
 
   StarPlot.legenda(legendOptions,cfgLegend);
   var player2=[];
