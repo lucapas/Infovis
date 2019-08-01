@@ -99,21 +99,27 @@ function createStarlPlot(data,nameClub1,formazione1,formazione_ripetuta){
 
 //crezione del primo starplot di partenza
 d3.csv(dataset, function(data) {
-  var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
-  var formazione_ripetuta={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
 
   let urlParams = new URLSearchParams(window.location.search);
   let clubName = urlParams.get('team');
+  let lineup = urlParams.get('lineup');
 
   // in case we reach this page through the navbar
-  if(clubName == null){
-    clubName = data[0]["Club"]
+  if(clubName == null && lineup == null){
+    clubName = data[0]["Club"];
+    lineup = "1433";
   }
 
+  let formazione1={Attaccante:parseInt(lineup[3]), Centrocampista:parseInt(lineup[2]), Difensore:parseInt(lineup[1]), Portiere:parseInt(lineup[0])};
+  let formazione_ripetuta={Attaccante:parseInt(lineup[3]), Centrocampista:parseInt(lineup[2]), Difensore:parseInt(lineup[1]), Portiere:parseInt(lineup[0])};
+  
   createStarlPlot(data, clubName, formazione1, formazione_ripetuta);
 
   // show the selected team in the search bar
   d3.select("#myVal1").property("value", clubName);
+
+  // show the selected lineup in the search bar
+  d3.select("#formation").property("value", lineup);
 
   d3.selectAll(".legend-text")
     .on("click", function(){handleClickOnPlayer.call(this)})
