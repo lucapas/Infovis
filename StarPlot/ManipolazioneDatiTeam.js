@@ -70,17 +70,19 @@ d3.csv(dataset_url, function(data) {
     var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
     var formazione2={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
 
-    // first case: reaching this page through the navbar
+    // in case we reach this page through the navbar
     if(firstClubName == null && secondClubName == null){
-      createStarlPlot(data, data[0]["Club"], data[1]["Club"], formazione1, formazione2);
-      updateLinkForTop11Comparison(data[0]["Club"], data[1]["Club"]);
+      firstClubName = data[0]["Club"];
+      secondClubName = data[1]["Club"];
     }
 
-    // second case: reaching this page through the team comparing link in StarPlotPlayers.html
-    else {
-      createStarlPlot(data, firstClubName, secondClubName, formazione1, formazione2);
-      updateLinkForTop11Comparison(firstClubName, secondClubName);
-    }
+    createStarlPlot(data, firstClubName, secondClubName, formazione1, formazione2);
+    updateLinkForTop11Comparison(firstClubName, secondClubName);
+
+    // show selected teams in the search bar
+    d3.select("#myVal1").attr("value", firstClubName);
+    d3.select("#myVal2").attr("value", secondClubName);
+
 });
 
 /*mi cerca tutti i giocatori di un club

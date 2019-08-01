@@ -105,15 +105,14 @@ d3.csv(dataset, function(data) {
   let urlParams = new URLSearchParams(window.location.search);
   let clubName = urlParams.get('team');
 
+  // in case we reach this page through the navbar
   if(clubName == null){
     clubName = data[0]["Club"]
-    createStarlPlot(data, clubName, formazione1, formazione_ripetuta);
   }
+  
+  createStarlPlot(data, clubName, formazione1, formazione_ripetuta);
 
-  else{
-    createStarlPlot(data,clubName,formazione1,formazione_ripetuta);
-  }
-
+  // show the selected team in the search bar
   d3.select("#myVal1").attr("value", clubName);
 
   d3.selectAll(".legend-text")
