@@ -112,7 +112,7 @@ d3.csv(dataset, function(data) {
 
   let formazione1={Attaccante:parseInt(lineup[3]), Centrocampista:parseInt(lineup[2]), Difensore:parseInt(lineup[1]), Portiere:parseInt(lineup[0])};
   let formazione_ripetuta={Attaccante:parseInt(lineup[3]), Centrocampista:parseInt(lineup[2]), Difensore:parseInt(lineup[1]), Portiere:parseInt(lineup[0])};
-  
+
   createStarlPlot(data, clubName, formazione1, formazione_ripetuta);
 
   // show the selected team in the search bar
@@ -136,16 +136,47 @@ output:
 */
 function listOfPlayerIntoStarPlotOneTeam(data, team1, formazione1){
   var playersClub1=[];
+  var listPlayerRiserve=[];
   data.forEach(function(d,i){
     if(d["Club"]==team1){
       posizione=calcoloPosizione(d,false);
       if(formazione1[posizione]>0){
+        d["FuoriRuolo"]=" ";
         playersClub1.push(d);
         formazione1[posizione]-=1;
+      }else{
+        listPlayerRiserve.push(d);
       }
     }
   });
-  return playersClub1
+  if(playersClub1.length<11){
+    var posizione_campo=["Attaccante","Centrocampista","Difensore","Portiere"]
+    posizione_campo.forEach(function(p,j){
+      listPlayerRiserve.forEach(function(d,i){
+        if(formazione1[p]>0){
+          posizione=calcoloPosizione(d,false);
+          if(p=="Attaccante" && posizione=="Centrocampista"){
+            d["PositionRule"]="Attaccante";
+            d["FuoriRuolo"]="*";
+            playersClub1.push(d);
+            formazione1[p]-=1;
+          }else if (p=="Centrocampista" && posizione=="Attaccante") {
+            d["PositionRule"]="Centrocampista";
+            d["FuoriRuolo"]="*";
+            playersClub1.push(d);
+            formazione1[p]-=1;
+          }else if (p=="Difensore" && posizione=="Centrocampista") {
+            d["PositionRule"]="Difensore";
+            d["FuoriRuolo"]="*";
+            playersClub1.push(d);
+            formazione1[p]-=1;
+          }
+        }
+      });
+    });
+  }
+  console.log(playersClub1);
+  return playersClub1;
 }
 
 function sixSkillGenerateForEachPlayerOneTeam(squadra,formazione){
@@ -162,6 +193,7 @@ function sixSkillGenerateForEachPlayerOneTeam(squadra,formazione){
     player["PositionRule"]=d["PositionRule"];
     player["Club"]=d["Club"];
     player["Position"]=d["Position"];
+    player["FuoriRuolo"]=d["FuoriRuolo"];
     player["ContributoTeam"]={};
     var posizione=player["PositionRule"];
     attribute.forEach(function(d,i){
@@ -182,19 +214,19 @@ function insertPlayer(club1,formation){
   var attaccante=formation["Attaccante"]+centrocampista;
   club1.forEach(function(d,i){
     if(d["PositionRule"]=="Attaccante"){
-      legendOptions[attaccante]=d["Name"]+" - "+d["PositionRule"];
+      legendOptions[attaccante]=d["Name"]+" - "+d["PositionRule"]+d["FuoriRuolo"];
       attaccante-=1;
     }
     if(d["PositionRule"]=="Centrocampista"){
-      legendOptions[centrocampista]=d["Name"]+" - "+d["PositionRule"];
+      legendOptions[centrocampista]=d["Name"]+" - "+d["PositionRule"]+d["FuoriRuolo"];
       centrocampista-=1;
     }
     if(d["PositionRule"]=="Difensore"){
-      legendOptions[difensore]=d["Name"]+" - "+d["PositionRule"];
+      legendOptions[difensore]=d["Name"]+" - "+d["PositionRule"]+d["FuoriRuolo"];
       difensore-=1;
     }
     if(d["PositionRule"]=="Portiere"){
-      legendOptions[portiere]=d["Name"]+" - "+d["PositionRule"];
+      legendOptions[portiere]=d["Name"]+" - "+d["PositionRule"]+d["FuoriRuolo"];
       portiere-=1;
     }
   });
@@ -259,7 +291,7 @@ d3.csv(dataset, function(data) {
 
   var formazione1={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
   var formazione_ripetuta={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
-  
+
 
   let clubName = search(data,squadra1,100)
   createStarlPlot(data,search(data,squadra1,100),formazione1,formazione_ripetuta);
@@ -274,7 +306,7 @@ d3.csv(dataset, function(data) {
   // update click handler for selecting players in the starplot legend
   d3.selectAll(".legend-text")
     .on("click", function(){handleClickOnPlayer.call(this)});
-  
+
 
   });
   return false;
