@@ -47,7 +47,7 @@ function createStarlPlot(data,nameClub1,nameClub2,formazione1,formazione2){
   legendOptions.push(nameClub2);
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
   StarPlot.legenda(legendOptions,cfgLegend,"Teams:");
-  StarPlot.starPlot(cfgStarPlot,creaSintassiPerStarPlot(club1[0]),creaSintassiPerStarPlot(club2[0]),attribute,legendOptions,cfgLegend);
+  StarPlot.starPlot(cfgStarPlot,creaSintassiPerStarPlot(club1[0]),creaSintassiPerStarPlot(club2[0]),attribute,legendOptions,cfgLegend,"Teams:");
 }
 
 

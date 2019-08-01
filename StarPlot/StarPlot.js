@@ -62,7 +62,7 @@ var StarPlot =
 	  	  ;
 	},
 
-	starPlot:function(cfg,player1,player2,attribute,legendOptions,cfgLegend){
+	starPlot:function(cfg,player1,player2,attribute,legendOptions,cfgLegend,name){
 
     //metto gli input in variabili apposite
     var allAxis=attribute;
@@ -232,7 +232,7 @@ var StarPlot =
 											var players_invert_legend=[legendOptions[0],legendOptions[1]];
 											cfgLegend.legendInvert=true;
 										}
-										StarPlot.legenda(players_invert_legend,cfgLegend);
+										StarPlot.legenda(players_invert_legend,cfgLegend,name);
                 });
       	  series++;
       	});

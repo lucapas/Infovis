@@ -100,7 +100,7 @@ function createStarlPlot(startPlayer1,startPlayer2){
     player2.push({axis:"Dribbling",value:dribbling(startPlayer2["Dribbling"],startPlayer2["BallControl"],startPlayer2["Agility"],startPlayer2["Balance"])});
     player2.push({axis:"Physical",value:physical(startPlayer2["Strength"],startPlayer2["Stamina"],startPlayer2["Aggression"],startPlayer2["Jumping"])});
 
-    StarPlot.starPlot(cfgStarPlot,player1,player2,attribute,legendOptions,cfgLegend);
+    StarPlot.starPlot(cfgStarPlot,player1,player2,attribute,legendOptions,cfgLegend,"Players:");
   }
 }
 
