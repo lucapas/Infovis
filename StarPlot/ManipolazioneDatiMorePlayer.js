@@ -93,7 +93,7 @@ function createStarlPlot(data,nameClub1,formazione1,formazione_ripetuta){
   var legendOptions = insertPlayer(club1,formazione_ripetuta);
 
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
-  StarPlotMorePlayers.legenda(legendOptions,cfgLegend);
+  StarPlotMorePlayers.legenda(legendOptions,cfgLegend,nameClub1);
   StarPlotMorePlayers.starPlot(cfgStarPlot,creaSintassiPerStarPlotMorePlayers(club1,attribute),attribute,legendOptions,cfgLegend);
 }
 
@@ -243,7 +243,7 @@ function creaSintassiPerStarPlotMorePlayers(club,attribute){
 //funzione che parte quando si clicca sulla ricerca
 function handleClick(event){
 d3.csv(dataset, function(data) {
-  var squadra1=document.getElementById("myVal1").value.toUpperCase();
+  var squadra1=document.getElementById("myVal1").value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
   d3.selectAll("svg").remove();
   d3.selectAll(".listOfPlayer").remove();
 

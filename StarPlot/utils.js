@@ -216,7 +216,7 @@ in output la lista dei giocatori trovati
 function searchPlayer(data,val){
   var listOfPlayer1=[];
   data.every(function(player, i){
-    if(player["Club"].toUpperCase().match(val)){
+    if(player["Club"].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().match(val)){
       var clubInlistOfPlayer=true;
       listOfPlayer1.every(function(d,i){
         if(d==player["Club"]){

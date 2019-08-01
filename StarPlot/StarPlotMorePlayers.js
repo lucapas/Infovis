@@ -6,7 +6,7 @@ var StarPlotMorePlayers =
 	/////////// Initiate legend ////////////////
 	////////////////////////////////////////////
 	//prende la lista dei giocatori e cfg
-	legenda: function(legendOptions,cfg){
+	legenda: function(legendOptions,cfg,nameClub1){
 
 	  var colorscale = cfg.color;
 	  d3.selectAll(".svglegend").remove();
@@ -27,7 +27,7 @@ var StarPlotMorePlayers =
 	  	.attr("y", 10)
 	  	.attr("font-size", "12px")
 	  	.attr("fill", "#404040")
-	  	.text("Items:");
+	  	.text(nameClub1);
 
 	  //Initiate Legend
 	  var legend = svg.append("g")

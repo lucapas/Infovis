@@ -118,8 +118,8 @@ function handleClick(event){
 
   //cerco i giocatori nel dataset
   d3.csv(dataset_url, function(data) {
-    squadra1=document.getElementById("myVal1").value.toUpperCase();
-    squadra2=document.getElementById("myVal2").value.toUpperCase();
+    squadra1=document.getElementById("myVal1").value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+    squadra2=document.getElementById("myVal2").value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
     d3.selectAll("svg").remove();
     d3.selectAll(".listOfPlayer").remove();
     var formazione=document.getElementById("formation1").value.split("");
