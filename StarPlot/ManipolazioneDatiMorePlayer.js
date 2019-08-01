@@ -106,12 +106,15 @@ d3.csv(dataset, function(data) {
   let clubName = urlParams.get('team');
 
   if(clubName == null){
-    createStarlPlot(data,data[0]["Club"],formazione1,formazione_ripetuta);
+    clubName = data[0]["Club"]
+    createStarlPlot(data, clubName, formazione1, formazione_ripetuta);
   }
 
   else{
     createStarlPlot(data,clubName,formazione1,formazione_ripetuta);
   }
+
+  d3.select("#myVal1").attr("value", clubName);
 
   d3.selectAll(".legend-text")
     .on("click", function(){handleClickOnPlayer.call(this)})
