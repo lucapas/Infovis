@@ -101,7 +101,7 @@ function sixSkillGenerateForClubPortiere(startPlayer1){
   var player1={};
   player1["Pace"]=0;
   player1["Passing"]=0;
-  player1["Defending"]=startPlayer1["GKDiving"]*0.20+startPlayer1["GKHandling"]*0.15,startPlayer1["GKKicking"]*0.05,startPlayer1["GKPositioning"]*0.10,startPlayer1["GKReflexes"]*0.50;
+  player1["Defending"]=startPlayer1["Reactions"]*0.06+startPlayer1["GKDiving"]*0.24+startPlayer1["GKHandling"]*0.22,startPlayer1["GKKicking"]*0.04,startPlayer1["GKPositioning"]*0.22,startPlayer1["GKReflexes"]*0.22;
   player1["Shooting"]=0;
   player1["Dribbling"]=0;
   player1["Physical"]=0;

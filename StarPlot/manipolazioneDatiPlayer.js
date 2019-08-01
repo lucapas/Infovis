@@ -45,31 +45,62 @@ function updateLinkForTeamComparison(firstTeamName, secondTeamName){
 
 //creazione dello starplot con input i 2 player da confrontare
 function createStarlPlot(startPlayer1,startPlayer2){
-  var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
-  var legendOptions = [];
-  legendOptions.push(startPlayer1["Name"] + " - "+ calcoloPosizione(startPlayer1,false) + " (" + startPlayer1["Club"] + ")");
-  var player1=[];
-  console.log(startPlayer1);
-  console.log(startPlayer2);
-  player1.push({axis:"Pace",value:pace(startPlayer1["SprintSpeed"],startPlayer1["Acceleration"])});
-  player1.push({axis:"Passing",value:passing(startPlayer1["ShortPassing"],startPlayer1["Crossing"],startPlayer1["Vision"],startPlayer1["LongPassing"],startPlayer1["Curve"],startPlayer1["FKAccuracy"])});
-  player1.push({axis:"Defending",value:defending(startPlayer1["StandingTackle"],startPlayer1["Marking"],startPlayer1["Interceptions"],startPlayer1["HeadingAccuracy"],startPlayer1["SlidingTackle"])});
-  player1.push({axis:"Shooting",value:shooting(startPlayer1["Finishing"],startPlayer1["LongShots"],startPlayer1["ShotPower"],startPlayer1["Volleys"],startPlayer1["Positioning"],startPlayer1["Penalties"])});
-  player1.push({axis:"Dribbling",value:dribbling(startPlayer1["Dribbling"],startPlayer1["BallControl"],startPlayer1["Agility"],startPlayer1["Balance"])});
-  player1.push({axis:"Physical",value:physical(startPlayer1["Strength"],startPlayer1["Stamina"],startPlayer1["Aggression"],startPlayer1["Jumping"])});
+  var posizione1=calcoloPosizione(startPlayer1,false);
+  var posizione2=calcoloPosizione(startPlayer2,false);
+  if(posizione1=="Portiere" && posizione2=="Portiere"){
+    var attribute=["Diving","Handling","Positioning", "Reflexes", "Reactions", "Kicking"];
+    var legendOptions = [];
+    legendOptions.push(startPlayer1["Name"] + " - "+ posizione1 + " (" + startPlayer1["Club"] + ")");
+    var player1=[];
+    console.log(startPlayer1);
+    console.log(startPlayer2);
+    player1.push({axis:"Diving",value: startPlayer1["GKDiving"] });
+    player1.push({axis:"Handling",value: startPlayer1["GKHandling"] });
+    player1.push({axis:"Positioning",value: startPlayer1["GKPositioning"]});
+    player1.push({axis:"Reflexes",value: startPlayer1["GKReflexes"] });
+    player1.push({axis:"Reactions",value: startPlayer1["Reactions"] });
+    player1.push({axis:"Kicking",value: startPlayer1["GKKicking"] });
 
-  legendOptions.push(startPlayer2["Name"]+ " - "+ calcoloPosizione(startPlayer2,false) + " (" + startPlayer2["Club"] + ")");
+    legendOptions.push(startPlayer2["Name"]+ " - "+ posizione2 + " (" + startPlayer2["Club"] + ")");
 
-  StarPlot.legenda(legendOptions,cfgLegend);
-  var player2=[];
-  player2.push({axis:"Pace",value:pace(startPlayer2["SprintSpeed"],startPlayer2["Acceleration"])});
-  player2.push({axis:"Passing",value:passing(startPlayer2["ShortPassing"],startPlayer2["Crossing"],startPlayer2["Vision"],startPlayer2["LongPassing"],startPlayer2["Curve"],startPlayer2["FKAccuracy"])});
-  player2.push({axis:"Defending",value:defending(startPlayer2["StandingTackle"],startPlayer2["Marking"],startPlayer2["Interceptions"],startPlayer2["HeadingAccuracy"],startPlayer2["SlidingTackle"])});
-  player2.push({axis:"Shooting",value:shooting(startPlayer2["Finishing"],startPlayer2["LongShots"],startPlayer2["ShotPower"],startPlayer2["Volleys"],startPlayer2["Positioning"],startPlayer2["Penalties"])});
-  player2.push({axis:"Dribbling",value:dribbling(startPlayer2["Dribbling"],startPlayer2["BallControl"],startPlayer2["Agility"],startPlayer2["Balance"])});
-  player2.push({axis:"Physical",value:physical(startPlayer2["Strength"],startPlayer2["Stamina"],startPlayer2["Aggression"],startPlayer2["Jumping"])});
+    StarPlot.legenda(legendOptions,cfgLegend);
+    var player2=[];
+    player2.push({axis:"Diving",value: startPlayer2["GKDiving"] });
+    player2.push({axis:"Handling",value: startPlayer2["GKHandling"] });
+    player2.push({axis:"Positioning",value: startPlayer2["GKPositioning"]});
+    player2.push({axis:"Reflexes",value: startPlayer2["GKReflexes"] });
+    player2.push({axis:"Reactions",value: startPlayer2["Reactions"] });
+    player2.push({axis:"Kicking",value: startPlayer2["GKKicking"] });
 
-  StarPlot.starPlot(cfgStarPlot,player1,player2,attribute,legendOptions,cfgLegend);
+    StarPlot.starPlot(cfgStarPlot,player1,player2,attribute,legendOptions,cfgLegend);
+  }
+  else{
+    var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
+    var legendOptions = [];
+    legendOptions.push(startPlayer1["Name"] + " - "+ posizione1 + " (" + startPlayer1["Club"] + ")");
+    var player1=[];
+    console.log(startPlayer1);
+    console.log(startPlayer2);
+    player1.push({axis:"Pace",value:pace(startPlayer1["SprintSpeed"],startPlayer1["Acceleration"])});
+    player1.push({axis:"Passing",value:passing(startPlayer1["ShortPassing"],startPlayer1["Crossing"],startPlayer1["Vision"],startPlayer1["LongPassing"],startPlayer1["Curve"],startPlayer1["FKAccuracy"])});
+    player1.push({axis:"Defending",value:defending(startPlayer1["StandingTackle"],startPlayer1["Marking"],startPlayer1["Interceptions"],startPlayer1["HeadingAccuracy"],startPlayer1["SlidingTackle"])});
+    player1.push({axis:"Shooting",value:shooting(startPlayer1["Finishing"],startPlayer1["LongShots"],startPlayer1["ShotPower"],startPlayer1["Volleys"],startPlayer1["Positioning"],startPlayer1["Penalties"])});
+    player1.push({axis:"Dribbling",value:dribbling(startPlayer1["Dribbling"],startPlayer1["BallControl"],startPlayer1["Agility"],startPlayer1["Balance"])});
+    player1.push({axis:"Physical",value:physical(startPlayer1["Strength"],startPlayer1["Stamina"],startPlayer1["Aggression"],startPlayer1["Jumping"])});
+
+    legendOptions.push(startPlayer2["Name"]+ " - "+ posizione2 + " (" + startPlayer2["Club"] + ")");
+
+    StarPlot.legenda(legendOptions,cfgLegend);
+    var player2=[];
+    player2.push({axis:"Pace",value:pace(startPlayer2["SprintSpeed"],startPlayer2["Acceleration"])});
+    player2.push({axis:"Passing",value:passing(startPlayer2["ShortPassing"],startPlayer2["Crossing"],startPlayer2["Vision"],startPlayer2["LongPassing"],startPlayer2["Curve"],startPlayer2["FKAccuracy"])});
+    player2.push({axis:"Defending",value:defending(startPlayer2["StandingTackle"],startPlayer2["Marking"],startPlayer2["Interceptions"],startPlayer2["HeadingAccuracy"],startPlayer2["SlidingTackle"])});
+    player2.push({axis:"Shooting",value:shooting(startPlayer2["Finishing"],startPlayer2["LongShots"],startPlayer2["ShotPower"],startPlayer2["Volleys"],startPlayer2["Positioning"],startPlayer2["Penalties"])});
+    player2.push({axis:"Dribbling",value:dribbling(startPlayer2["Dribbling"],startPlayer2["BallControl"],startPlayer2["Agility"],startPlayer2["Balance"])});
+    player2.push({axis:"Physical",value:physical(startPlayer2["Strength"],startPlayer2["Stamina"],startPlayer2["Aggression"],startPlayer2["Jumping"])});
+
+    StarPlot.starPlot(cfgStarPlot,player1,player2,attribute,legendOptions,cfgLegend);
+  }
 }
 
 //crezione del primo starplot di partenza
