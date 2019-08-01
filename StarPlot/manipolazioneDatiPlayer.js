@@ -111,6 +111,7 @@ d3.csv(dataset_url, function(data) {
   let firstPlayerName = urlParams.get('firstPlayer');
   let secondPlayerName = urlParams.get('secondPlayer');
 
+
   // first case: reaching this page through the navbar
   if(firstPlayerName == null && secondPlayerName == null){
     createStarlPlot(data[0],data[1]);
@@ -121,6 +122,10 @@ d3.csv(dataset_url, function(data) {
 
   // compare players given in the query params
   else {
+
+    firstPlayerName = firstPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+    secondPlayerName = secondPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+    
     let listOfPlayers1 = searchPlayer(data, firstPlayerName.toUpperCase());
     let listOfPlayer1 = listOfPlayers1[0];
     let listOfPlayerStarPlot1 = listOfPlayers1[1];
