@@ -253,7 +253,23 @@ d3.csv(dataset, function(data) {
 
   var formazione1={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
   var formazione_ripetuta={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
+  
+
+  let clubName = search(data,squadra1,100)
   createStarlPlot(data,search(data,squadra1,100),formazione1,formazione_ripetuta);
+
+  // show the selected team in the search bar
+  d3.select("#myVal1").property("value", clubName);
+
+  // hide the link for comparing players
+  d3.select(".confronta-giocatori")
+  .attr("style", "display:none");
+
+  // update click handler for selecting players in the starplot legend
+  d3.selectAll(".legend-text")
+    .on("click", function(){handleClickOnPlayer.call(this)});
+  
+
   });
   return false;
 };
