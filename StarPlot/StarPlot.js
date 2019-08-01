@@ -29,7 +29,6 @@ var StarPlot =
 	  	.attr("font-size", "12px")
 	  	.attr("fill", "#404040")
 	  	.text(name);
-			console.log(name);
 	  //Initiate Legend
 	  var legend = svg.append("g")
 	  	.attr("class", "legend")
@@ -205,7 +204,6 @@ var StarPlot =
       										z = "polygon."+d3.select(this).attr("class");
 													col=d3.select("#player"+d3.select(this).attr("number"))
 													.attr("fill");
-													console.log(col);
 													d3.select("#player"+d3.select(this).attr("number"))
 													.attr("fill", "red");
       										svg.selectAll("polygon")

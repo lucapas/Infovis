@@ -91,7 +91,7 @@ function createStarlPlot(data,nameClub1,formazione1,formazione_ripetuta){
   players=listOfPlayerIntoStarPlotOneTeam(data,nameClub1,formazione1);
   var club1=sixSkillGenerateForEachPlayerOneTeam(orderPlayer(players,formazione_ripetuta),formazione_ripetuta);
   var legendOptions = insertPlayer(club1,formazione_ripetuta);
-
+  console.log(club1);
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
   StarPlotMorePlayers.legenda(legendOptions,cfgLegend,nameClub1);
   StarPlotMorePlayers.starPlot(cfgStarPlot,creaSintassiPerStarPlotMorePlayers(club1,attribute),attribute,legendOptions,cfgLegend);
@@ -109,7 +109,7 @@ d3.csv(dataset, function(data) {
   if(clubName == null){
     clubName = data[0]["Club"]
   }
-  
+
   createStarlPlot(data, clubName, formazione1, formazione_ripetuta);
 
   // show the selected team in the search bar
