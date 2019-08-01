@@ -49,6 +49,7 @@ function createStarlPlot(startPlayer1,startPlayer2){
   var legendOptions = [];
   legendOptions.push(startPlayer1["Name"] + " - "+ calcoloPosizione(startPlayer1,false) + " (" + startPlayer1["Club"] + ")");
   var player1=[];
+  console.log(startPlayer1);
   console.log(startPlayer2);
   player1.push({axis:"Pace",value:pace(startPlayer1["SprintSpeed"],startPlayer1["Acceleration"])});
   player1.push({axis:"Passing",value:passing(startPlayer1["ShortPassing"],startPlayer1["Crossing"],startPlayer1["Vision"],startPlayer1["LongPassing"],startPlayer1["Curve"],startPlayer1["FKAccuracy"])});

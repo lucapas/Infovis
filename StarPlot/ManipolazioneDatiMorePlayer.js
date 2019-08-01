@@ -38,7 +38,6 @@ var cfgListSuggerimenti = {
 // click handler for players's names on the starplot legend
 function handleClickOnPlayer(){
   let clickedPlayer = d3.select(this);
-  console.log(this);
 
   // selected players are those whose fill color is blue
   let selectedPlayers = d3.selectAll('.legend-text[fill^="blue"]')
@@ -63,17 +62,12 @@ function handleClickOnPlayer(){
 
   //show a link to compare two player (if a user select exactly two players)
   if(selectedPlayersLenght == 2){
-    console.log("two selected players:")
 
     let firstPlayerNameAndRole = selectedPlayers.nodes()[0].innerHTML;
     let firstPlayerName = firstPlayerNameAndRole.substring(0, firstPlayerNameAndRole.indexOf("-") - 1);
 
     let secondPlayerNameAndRole = selectedPlayers.nodes()[1].innerHTML;
     let secondPlayerName = secondPlayerNameAndRole.substring(0, secondPlayerNameAndRole.indexOf("-") - 1);
-
-
-    console.log(firstPlayerName);
-    console.log(secondPlayerName);
 
     let playerComparisonURL = "StarPlotPlayers.html".concat("?firstPlayer=" + encodeURIComponent(firstPlayerName) + "&secondPlayer=" + encodeURIComponent(secondPlayerName))
 
@@ -118,7 +112,7 @@ d3.csv(dataset, function(data) {
   else{
     createStarlPlot(data,clubName,formazione1,formazione_ripetuta);
   }
-  
+
   d3.selectAll(".legend-text")
     .on("click", function(){handleClickOnPlayer.call(this)})
 });
@@ -169,7 +163,6 @@ function sixSkillGenerateForEachPlayerOneTeam(squadra,formazione){
     });
     giocatori.push(player);
   });
-  console.log(giocatori);
   return giocatori;
 }
 
@@ -179,11 +172,6 @@ function insertPlayer(club1,formation){
   var difensore=formation["Difensore"];
   var centrocampista=formation["Centrocampista"]+difensore;
   var attaccante=formation["Attaccante"]+centrocampista;
-  console.log("-----------");
-  console.log(formation);
-  console.log(difensore);
-  console.log(centrocampista);
-  console.log(attaccante);
   club1.forEach(function(d,i){
     if(d["PositionRule"]=="Attaccante"){
       legendOptions[attaccante]=d["Name"]+" - "+d["PositionRule"];
@@ -202,7 +190,6 @@ function insertPlayer(club1,formation){
       portiere-=1;
     }
   });
-  console.log(legendOptions)
   return legendOptions;
 }
 
@@ -233,7 +220,6 @@ function orderPlayer(club1,formation){
       portiere-=1;
     }
   });
-  console.log(players)
   return players;
 }
 
@@ -251,7 +237,6 @@ function creaSintassiPerStarPlotMorePlayers(club,attribute){
   for (i = players.length-1; i >= 0; i--) {
     invert.push(players[i]);
   }
-  console.log(invert);
   return invert;
 }
 

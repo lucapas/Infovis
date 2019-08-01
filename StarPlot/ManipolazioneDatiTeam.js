@@ -37,10 +37,9 @@ var cfgListSuggerimenti = {
 
 
 //creazione dello starplot con inputi i 2 player da confrontare
-function createStarlPlot(data,nameClub1,nameClub2){
+function createStarlPlot(data,nameClub1,nameClub2,formazione1,formazione2){
   players=listOfPlayerIntoStarPlot(data,nameClub1,nameClub2);
-  var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
-  var formazione2={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+
   var club1=sixSkillGenerateForEachPlayer(players[0],formazione1,players[2]);
   var club2=sixSkillGenerateForEachPlayer(players[1],formazione2,players[3]);
   var legendOptions = [];
@@ -65,26 +64,23 @@ function updateLinkForTop11Comparison(firstTeamName, secondTeamName){
 
 //crezione del primo starplot di partenza
 d3.csv(dataset_url, function(data) {
-  d3.csv(dataset_url_match, function(data2) {
-    console.log(data2);
-
     let urlParams = new URLSearchParams(window.location.search);
     let firstClubName = urlParams.get('firstTeam');
     let secondClubName = urlParams.get('secondTeam');
-
+    var formazione1={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
+    var formazione2={Attaccante:3, Centrocampista:3, Difensore:4, Portiere:1};
 
     // first case: reaching this page through the navbar
     if(firstClubName == null && secondClubName == null){
-      createStarlPlot(data, data[0]["Club"], data[1]["Club"]);
+      createStarlPlot(data, data[0]["Club"], data[1]["Club"], formazione1, formazione2);
       updateLinkForTop11Comparison(data[0]["Club"], data[1]["Club"]);
     }
 
     // second case: reaching this page through the team comparing link in StarPlotPlayers.html
     else {
-      createStarlPlot(data, firstClubName, secondClubName);
+      createStarlPlot(data, firstClubName, secondClubName, formazione1, formazione2);
       updateLinkForTop11Comparison(firstClubName, secondClubName);
     }
-  });
 });
 
 /*mi cerca tutti i giocatori di un club
@@ -126,8 +122,16 @@ function handleClick(event){
     squadra2=document.getElementById("myVal2").value.toUpperCase();
     d3.selectAll("svg").remove();
     d3.selectAll(".listOfPlayer").remove();
+    var formazione=document.getElementById("formation1").value.split("");
+
+    var formazione1={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
+
+    var formazione2=document.getElementById("formation2").value.split("");
+
+    var formazione_2={Attaccante:parseInt(formazione2[3]), Centrocampista:parseInt(formazione2[2]), Difensore:parseInt(formazione2[1]), Portiere:parseInt(formazione2[0])};
+
     //infine creo lo starplot
-    createStarlPlot(data,search(data,squadra1,0),search(data,squadra2,cfgListSuggerimenti.width+10));
+    createStarlPlot(data,search(data,squadra1,0),search(data,squadra2,cfgListSuggerimenti.width+10),formazione1,formazione_2);
 
   });
   return false;
