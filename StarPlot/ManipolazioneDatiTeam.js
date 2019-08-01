@@ -51,14 +51,14 @@ function createStarlPlot(data,nameClub1,nameClub2,formazione1,formazione2){
 }
 
 
-function updateLinkForTop11Comparison(firstTeamName, secondTeamName){
+function updateLinkForTop11Comparison(firstTeamName, secondTeamName, firstLineup, secondLineup){
   let top11URLPrefix = "StarPlotMorePlayer.html?team=";
 
   d3.select(".confronta-top-11-1")
-    .attr("href", top11URLPrefix.concat(encodeURIComponent(firstTeamName)))
+    .attr("href", top11URLPrefix.concat(encodeURIComponent(firstTeamName), "&lineup=", encodeURIComponent(firstLineup)))
 
   d3.select(".confronta-top-11-2")
-    .attr("href", top11URLPrefix.concat(encodeURIComponent(secondTeamName)));
+    .attr("href", top11URLPrefix.concat(encodeURIComponent(secondTeamName), "&lineup=", encodeURIComponent(secondLineup)));
 }
 
 
@@ -77,7 +77,7 @@ d3.csv(dataset_url, function(data) {
     }
 
     createStarlPlot(data, firstClubName, secondClubName, formazione1, formazione2);
-    updateLinkForTop11Comparison(firstClubName, secondClubName);
+    updateLinkForTop11Comparison(firstClubName, secondClubName, "1433", "1433");
 
     // show selected teams in the search bar
     d3.select("#myVal1").property("value", firstClubName);
@@ -139,7 +139,7 @@ function handleClick(event){
 
     createStarlPlot(data,search(data,squadra1,0),search(data,squadra2,cfgListSuggerimenti.width+10),formazione1,formazione_2);
 
-    updateLinkForTop11Comparison(firstClubName, secondClubName);
+    updateLinkForTop11Comparison(firstClubName, secondClubName, formazione1AsString, formazione2AsString);
 
     // show selected teams in the search bar
 
