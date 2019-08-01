@@ -111,26 +111,32 @@ d3.csv(dataset_url, function(data) {
   let firstPlayerName = urlParams.get('firstPlayer');
   let secondPlayerName = urlParams.get('secondPlayer');
 
+  let firstPlayerTeamName = null;
+  let secondPlayerTeamName = null;
+
 
   // first case: reaching this page through the navbar
   if(firstPlayerName == null && secondPlayerName == null){
+    firstPlayerName = data[0]["Name"];
+    secondPlayerName = data[1]["Name"];
+
     createStarlPlot(data[0],data[1]);
-    let firstPlayerTeamName = data[0]["Club"];
-    let secondPlayerTeamName = data[1]["Club"];
-    updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
+
+    firstPlayerTeamName = data[0]["Club"];
+    secondPlayerTeamName = data[1]["Club"];
   }
 
   // compare players given in the query params
   else {
 
-    firstPlayerName = firstPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-    secondPlayerName = secondPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+    firstPlayerNameNormalized = firstPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+    secondPlayerNameNormalized = secondPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
     
-    let listOfPlayers1 = searchPlayer(data, firstPlayerName.toUpperCase());
+    let listOfPlayers1 = searchPlayer(data, firstPlayerNameNormalized.toUpperCase());
     let listOfPlayer1 = listOfPlayers1[0];
     let listOfPlayerStarPlot1 = listOfPlayers1[1];
 
-    let listOfPlayers2 = searchPlayer(data, secondPlayerName.toUpperCase());
+    let listOfPlayers2 = searchPlayer(data, secondPlayerNameNormalized.toUpperCase());
     let listOfPlayer2 = listOfPlayers2[0];
     let listOfPlayerStarPlot2 = listOfPlayers2[1];
 
@@ -139,12 +145,17 @@ d3.csv(dataset_url, function(data) {
 
     createStarlPlot(player1, player2);
 
-    let firstPlayerTeamName = player1["Club"];
-    let secondPlayerTeamName = player2["Club"];
-
-    updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
-
+    firstPlayerTeamName = player1["Club"];
+    secondPlayerTeamName = player2["Club"];
   }
+
+  updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
+
+  // show the selected players' names in the search bar
+  d3.select("#myVal1").property("value", firstPlayerName);
+  d3.select("#myVal2").property("value", secondPlayerName);
+
+
 
 });
 
