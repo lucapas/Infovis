@@ -80,8 +80,8 @@ d3.csv(dataset_url, function(data) {
     updateLinkForTop11Comparison(firstClubName, secondClubName);
 
     // show selected teams in the search bar
-    d3.select("#myVal1").attr("value", firstClubName);
-    d3.select("#myVal2").attr("value", secondClubName);
+    d3.select("#myVal1").property("value", firstClubName);
+    d3.select("#myVal2").property("value", secondClubName);
 
 });
 
@@ -124,16 +124,27 @@ function handleClick(event){
     squadra2=document.getElementById("myVal2").value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
     d3.selectAll("svg").remove();
     d3.selectAll(".listOfPlayer").remove();
-    var formazione=document.getElementById("formation1").value.split("");
 
+    let formazione1AsString = document.getElementById("formation1").value;
+    var formazione = formazione1AsString.split("");
     var formazione1={Attaccante:parseInt(formazione[3]), Centrocampista:parseInt(formazione[2]), Difensore:parseInt(formazione[1]), Portiere:parseInt(formazione[0])};
 
-    var formazione2=document.getElementById("formation2").value.split("");
-
+    let formazione2AsString = document.getElementById("formation2").value;
+    var formazione2=formazione2AsString.split("");
     var formazione_2={Attaccante:parseInt(formazione2[3]), Centrocampista:parseInt(formazione2[2]), Difensore:parseInt(formazione2[1]), Portiere:parseInt(formazione2[0])};
 
-    //infine creo lo starplot
+    //infine aggiorno lo starplot
+    let firstClubName = search(data,squadra1,0)
+    let secondClubName = search(data,squadra2,cfgListSuggerimenti.width+10)
+
     createStarlPlot(data,search(data,squadra1,0),search(data,squadra2,cfgListSuggerimenti.width+10),formazione1,formazione_2);
+
+    updateLinkForTop11Comparison(firstClubName, secondClubName);
+
+    // show selected teams in the search bar
+
+    d3.select("#myVal1").property("value", firstClubName);
+    d3.select("#myVal2").property("value", secondClubName);
 
   });
   return false;

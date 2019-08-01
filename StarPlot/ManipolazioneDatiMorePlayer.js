@@ -113,7 +113,7 @@ d3.csv(dataset, function(data) {
   createStarlPlot(data, clubName, formazione1, formazione_ripetuta);
 
   // show the selected team in the search bar
-  d3.select("#myVal1").attr("value", clubName);
+  d3.select("#myVal1").property("value", clubName);
 
   d3.selectAll(".legend-text")
     .on("click", function(){handleClickOnPlayer.call(this)})
