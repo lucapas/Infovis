@@ -5,14 +5,14 @@ dataset_url_match="ClassificaSeriaA2019.csv";
 var cfgStarPlot = {
  w: 300,
  h: 300,
- TranslateX: 0,
- TranslateY: 0,
+ TranslateX: 10,
+ TranslateY: -40,
  maxValue: 100,
  radians: 2 * Math.PI,
  levels: 10, //numero di cerchi
  ToRight: 5, //distanza a destra dell'unità sui cerchi
  ToRight: -1, //distanza sotto dell'unità sui cerchi
- labelFactor: 1.25, //distanza del nome dell'asse
+ labelFactor: 1.17, //distanza del nome dell'asse
  color: d3.scaleOrdinal(d3.schemeCategory10),
  opacityArea: 0.5, //opacità dei poligoni
 };
