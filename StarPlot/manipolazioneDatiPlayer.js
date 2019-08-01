@@ -53,8 +53,7 @@ function createStarlPlot(startPlayer1,startPlayer2){
     var legendOptions = [];
     legendOptions.push(startPlayer1["Name"] + " - "+ posizione1 + " (" + startPlayer1["Club"] + ")");
     var player1=[];
-    console.log(startPlayer1);
-    console.log(startPlayer2);
+
     player1.push({axis:"Diving",value: startPlayer1["GKDiving"] });
     player1.push({axis:"Handling",value: startPlayer1["GKHandling"] });
     player1.push({axis:"Positioning",value: startPlayer1["GKPositioning"]});
@@ -72,7 +71,8 @@ function createStarlPlot(startPlayer1,startPlayer2){
     player2.push({axis:"Reflexes",value: startPlayer2["GKReflexes"] });
     player2.push({axis:"Reactions",value: startPlayer2["Reactions"] });
     player2.push({axis:"Kicking",value: startPlayer2["GKKicking"] });
-
+    console.log(player1);
+    console.log(player2);
     StarPlot.starPlot(cfgStarPlot,player1,player2,attribute,legendOptions,cfgLegend);
   }
   else{
@@ -80,8 +80,6 @@ function createStarlPlot(startPlayer1,startPlayer2){
     var legendOptions = [];
     legendOptions.push(startPlayer1["Name"] + " - "+ posizione1 + " (" + startPlayer1["Club"] + ")");
     var player1=[];
-    console.log(startPlayer1);
-    console.log(startPlayer2);
     player1.push({axis:"Pace",value:pace(startPlayer1["SprintSpeed"],startPlayer1["Acceleration"])});
     player1.push({axis:"Passing",value:passing(startPlayer1["ShortPassing"],startPlayer1["Crossing"],startPlayer1["Vision"],startPlayer1["LongPassing"],startPlayer1["Curve"],startPlayer1["FKAccuracy"])});
     player1.push({axis:"Defending",value:defending(startPlayer1["StandingTackle"],startPlayer1["Marking"],startPlayer1["Interceptions"],startPlayer1["HeadingAccuracy"],startPlayer1["SlidingTackle"])});
@@ -99,7 +97,10 @@ function createStarlPlot(startPlayer1,startPlayer2){
     player2.push({axis:"Shooting",value:shooting(startPlayer2["Finishing"],startPlayer2["LongShots"],startPlayer2["ShotPower"],startPlayer2["Volleys"],startPlayer2["Positioning"],startPlayer2["Penalties"])});
     player2.push({axis:"Dribbling",value:dribbling(startPlayer2["Dribbling"],startPlayer2["BallControl"],startPlayer2["Agility"],startPlayer2["Balance"])});
     player2.push({axis:"Physical",value:physical(startPlayer2["Strength"],startPlayer2["Stamina"],startPlayer2["Aggression"],startPlayer2["Jumping"])});
-
+    console.log(startPlayer1);
+    console.log(startPlayer2);
+    console.log(player1);
+    console.log(player2);
     StarPlot.starPlot(cfgStarPlot,player1,player2,attribute,legendOptions,cfgLegend,"Players:");
   }
 }
@@ -131,7 +132,7 @@ d3.csv(dataset_url, function(data) {
 
     firstPlayerNameNormalized = firstPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
     secondPlayerNameNormalized = secondPlayerName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-    
+
     let listOfPlayers1 = searchPlayer(data, firstPlayerNameNormalized.toUpperCase());
     let listOfPlayer1 = listOfPlayers1[0];
     let listOfPlayerStarPlot1 = listOfPlayers1[1];

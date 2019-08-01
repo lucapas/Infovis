@@ -51,7 +51,7 @@ function shooting(finish,longShots,shotPwr,volleys,positioning,penality){
   return finish*0.45+longShots*0.20+shotPwr*0.20+volleys*0.05+positioning*0.05+penality*0.05;
 }
 function dribbling(drib,ballCntrl,agility,volleys){
-  return drib*0.50+ballCntrl*0.30+agility*0.10+volleys*0.05;
+  return drib*0.50+ballCntrl*0.35+agility*0.10+volleys*0.05;
 }
 function physical(stren,stamina,aggres,jump){
   return stren*0.50+stamina*0.25+aggres*0.20+jump*0.05;
