@@ -233,6 +233,20 @@ var StarPlot =
 											cfgLegend.legendInvert=true;
 										}
 										StarPlot.legenda(players_invert_legend,cfgLegend,name);
+
+                    let top11URLFirstTeam = d3.select(".confronta-top-11-1");
+                    let top11URLSecondTeam = d3.select(".confronta-top-11-2");
+                    console.log(top11URLFirstTeam)
+
+                    if(top11URLFirstTeam.size() === 1 && top11URLSecondTeam.size() === 1){
+                      console.log("hi")
+                      let firstURL = top11URLFirstTeam.attr("href");
+                      let secondURL = top11URLSecondTeam.attr("href");
+
+                      // swap the two hrefs
+                      top11URLSecondTeam.attr("href", firstURL);
+                      top11URLFirstTeam.attr("href", secondURL);
+                    }
                 });
       	  series++;
       	});
