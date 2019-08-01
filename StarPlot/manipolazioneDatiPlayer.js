@@ -45,6 +45,7 @@ function updateLinkForTeamComparison(firstTeamName, secondTeamName){
 
 //creazione dello starplot con input i 2 player da confrontare
 function createStarlPlot(startPlayer1,startPlayer2){
+
   var posizione1=calcoloPosizione(startPlayer1,false);
   var posizione2=calcoloPosizione(startPlayer2,false);
   if(posizione1=="Portiere" && posizione2=="Portiere"){
@@ -149,7 +150,7 @@ function searchPlayer(data,val){
   var listOfPlayer1=[];
   var listOfPlayerStarPlot1=[];
   data.every(function(player, i){
-    if(player["Name"].toUpperCase().match(val)){
+    if(player["Name"].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().match(val)){
       listOfPlayer1.push(player["Name"]);
       listOfPlayerStarPlot1.push(player);
       if (listOfPlayer1.length>=10){
@@ -171,11 +172,12 @@ function handleClick(event){
   //cerco i giocatori nel dataset
   d3.csv(dataset_url, function(data) {
     d3.selectAll("svg").remove();
-    var listOfPlayers1=searchPlayer(data,document.getElementById("myVal1").value.toUpperCase());
+
+    var listOfPlayers1=searchPlayer(data,document.getElementById("myVal1").value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase());
     var listOfPlayer1=listOfPlayers1[0];
     var listOfPlayerStarPlot1=listOfPlayers1[1];
 
-    var listOfPlayers2=searchPlayer(data,document.getElementById("myVal2").value.toUpperCase());
+    var listOfPlayers2=searchPlayer(data,document.getElementById("myVal2").value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase());
     var listOfPlayer2=listOfPlayers2[0];
     var listOfPlayerStarPlot2=listOfPlayers2[1];
 
