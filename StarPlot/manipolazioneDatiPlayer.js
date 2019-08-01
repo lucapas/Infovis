@@ -64,7 +64,7 @@ function createStarlPlot(startPlayer1,startPlayer2){
 
     legendOptions.push(startPlayer2["Name"]+ " - "+ posizione2 + " (" + startPlayer2["Club"] + ")");
 
-    StarPlot.legenda(legendOptions,cfgLegend);
+    StarPlot.legenda(legendOptions,cfgLegend,"Players:");
     var player2=[];
     player2.push({axis:"Diving",value: startPlayer2["GKDiving"] });
     player2.push({axis:"Handling",value: startPlayer2["GKHandling"] });
@@ -91,7 +91,7 @@ function createStarlPlot(startPlayer1,startPlayer2){
 
     legendOptions.push(startPlayer2["Name"]+ " - "+ posizione2 + " (" + startPlayer2["Club"] + ")");
 
-    StarPlot.legenda(legendOptions,cfgLegend);
+    StarPlot.legenda(legendOptions,cfgLegend,"Players:");
     var player2=[];
     player2.push({axis:"Pace",value:pace(startPlayer2["SprintSpeed"],startPlayer2["Acceleration"])});
     player2.push({axis:"Passing",value:passing(startPlayer2["ShortPassing"],startPlayer2["Crossing"],startPlayer2["Vision"],startPlayer2["LongPassing"],startPlayer2["Curve"],startPlayer2["FKAccuracy"])});

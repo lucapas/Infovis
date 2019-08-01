@@ -7,7 +7,7 @@ var StarPlot =
 	/////////// Initiate legend ////////////////
 	////////////////////////////////////////////
 	//prende la lista dei giocatori e cfg
-	legenda: function(legendOptions,cfg){
+	legenda: function(legendOptions,cfg,name){
 
 	  var colorscale = cfg.color;
 	  d3.selectAll(".svglegend").remove();
@@ -28,8 +28,8 @@ var StarPlot =
 	  	.attr("y", 10)
 	  	.attr("font-size", "12px")
 	  	.attr("fill", "#404040")
-	  	.text("Items:");
-
+	  	.text(name);
+			console.log(name);
 	  //Initiate Legend
 	  var legend = svg.append("g")
 	  	.attr("class", "legend")
@@ -54,6 +54,7 @@ var StarPlot =
 	  	  .data(legendOptions)
 	  	  .enter()
 	  	  .append("text")
+				.attr("id", function(d,i){return "player"+i})
 	  	  .attr("x", cfg.w - 352)
 	  	  .attr("y", function(d, i){ return i * 20 + 9;})
 	  	  .attr("font-size", "11px")
@@ -172,12 +173,14 @@ var StarPlot =
       //series mi serve per variare il colore
       function poligoni(players_conf){
         var series=0
+				var col="";
         players_conf.forEach(function(player, x){
       	  svg.selectAll(".area")
       					 .data([player])
       					 .enter()
       					 .append("polygon")
       					 .attr("class", "radar-chart-serie"+series)
+								 .attr("number",series)
       					 .style("stroke-width", "2px")
       					 .style("stroke", cfg.color(series))
       					 .attr("points",function(d,i){
@@ -200,6 +203,11 @@ var StarPlot =
       					 .style("fill-opacity", cfg.opacityArea)
       					 .on('mouseover', function (d){
       										z = "polygon."+d3.select(this).attr("class");
+													col=d3.select("#player"+d3.select(this).attr("number"))
+													.attr("fill");
+													console.log(col);
+													d3.select("#player"+d3.select(this).attr("number"))
+													.attr("fill", "red");
       										svg.selectAll("polygon")
       										 .transition(200)
       										 .style("fill-opacity", 0.1);
@@ -211,6 +219,8 @@ var StarPlot =
       										svg.selectAll("polygon")
       										 .transition(200)
       										 .style("fill-opacity", cfg.opacityArea);
+													 d3.select("#player"+d3.select(this).attr("number"))
+														.attr("fill", col);
       					 })
                  .on("click", function(d,i){
            					d3.select(".radar-chart-serie0").remove();
