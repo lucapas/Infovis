@@ -220,12 +220,12 @@ function handleClick(event){
     if(listOfPlayer1.length<=0){
       player1=data[0];
       listOfPlayerNew1=searchPlayer(data,document.getElementById("myVal1").value.toUpperCase().charAt(0));
-      listOfPlayers(listOfPlayerNew1[0],cfgListSuggerimenti.left,"Primo player non trovato forse cercavi:");
+      listOfPlayers(listOfPlayerNew1[0],cfgListSuggerimenti.left,"Primo player non trovato. Forse cercavi:");
     }
     if(listOfPlayer2.length<=0){
       player2=data[1];
       listOfPlayerNew2=searchPlayer(data,document.getElementById("myVal2").value.toUpperCase().charAt(0))
-      listOfPlayers(listOfPlayerNew2[0],(cfgListSuggerimenti.left+cfgListSuggerimenti.width+10),"Secondo player non trovato forse cercavi:");
+      listOfPlayers(listOfPlayerNew2[0],(cfgListSuggerimenti.left+cfgListSuggerimenti.width+10),"Secondo player non trovato. Forse cercavi:");
     }
 
     //infine creo lo starplot

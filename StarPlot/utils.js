@@ -297,12 +297,12 @@ function search(data,squadra,dist){
   }
   if(listOfPlayer1.length<=0){
     if(dist<150){
-      descrizione="Primo team non trovato forse cercavi:";
+      descrizione="Primo team non trovato. Forse cercavi:";
     }else{
-      descrizione="Secondo team non trovato forse cercavi:";
+      descrizione="Secondo team non trovato. Forse cercavi:";
     }
     if(dist==100){
-      descrizione="Team non trovato forse cercavi:";
+      descrizione="Team non trovato. Forse cercavi:";
     }
     listOfPlayerNew1=searchPlayer(data,squadra.charAt(0));
     player1=listOfPlayerNew1[0];
