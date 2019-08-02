@@ -46,8 +46,8 @@ Il confronto tra due giocatori o due squadre viene effettuato attraverso la comp
 I calcoli di queste skill sono stati fatti attraverso formule che utilizza fifa prese da questo link: https://www.fifauteam.com/player-ratings-guide-fifa-19/
 </br>
 
-Per quanto riguarda i Team sono state seguite delle formule per decidere quanto un giocatore contribuisce nel calcolo della forza totale della squadra. I giocatori sono stati suddivisi in base alla loro posizione (Portiere, Difensore, Centrocampista, Attaccante). 
-<ul>In base a questa posizione il giocatore contribuirà ad ogni skill seguendo queste regole:</ul>
+<ul>Per quanto riguarda i Team sono state seguite delle formule per decidere quanto un giocatore contribuisce nel calcolo della forza totale della squadra. I giocatori sono stati suddivisi in base alla loro posizione (Portiere, Difensore, Centrocampista, Attaccante). 
+In base a questa posizione il giocatore contribuirà ad ogni skill seguendo queste regole:</ul>
   <li> Pace: Attaccante 60%, Centrocampista 20%, Difensore 20%, Portiere 0% </li>  
   <li> Passing </li>
   <li> Defending </li>
