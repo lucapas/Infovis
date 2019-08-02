@@ -33,7 +33,7 @@ Nelle tre viste sono presenti delle barre di ricerca per inserire i giocatori (o
 Qualora il nome digitato non fosse corretto, verranno mostrati dei suggerimenti all'utente.
 Nelle viste Star Plot Teams e Star Plot Top 11 è presente una barra _dropdown_ per poter selezionare la formazione sulla base della quale computare e visualizzare le statistiche del team in questione.
 
-### 3. Skills
+## 3. Skills
 
 Il confronto tra due giocatori o due squadre viene effettuato attraverso la comparazione di 6 skill. 
 </br>
@@ -69,6 +69,6 @@ Nello specifico, ciascun giocatore influisce con le sue abilità alle skill (_Pa
   <li> Dribbling: Attaccante 70%, Centrocampista 20%, Difensore 10%, Portiere 0% </li>
   <li> Physical: Attaccante 20%, Centrocampista 20%, Difensore 60%, Portiere 0% </li>
   
-### Componenti del team
+## 4. Componenti del team
 - [Jerin George Mathew](https://github.com/jgeorgemathew)
 - [Luca Pasquini](https://github.com/lucapas)
