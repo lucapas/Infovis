@@ -36,6 +36,7 @@ Queste 6 skill per i giocatori di movimento e per i team sono:
 
 </br>
 Invece per i portieri abbiamo queste altre 6 skill: 
+</br>
   <li> Diving </li>  
   <li> Handling </li>
   <li> Positioning </li>
@@ -45,6 +46,7 @@ Invece per i portieri abbiamo queste altre 6 skill:
 
 </br>
 I calcoli di queste skill sono stati fatti attraverso formule che utilizza fifa prese da questo link: https://www.fifauteam.com/player-ratings-guide-fifa-19/
+</br>
 </br>
 
 Per quanto riguarda i Team sono state seguite delle formule per decidere quanto un giocatore contribuisce nel calcolo della forza totale della squadra. I giocatori sono stati suddivisi in base alla loro posizione (Portiere, Difensore, Centrocampista, Attaccante). 
