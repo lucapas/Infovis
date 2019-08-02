@@ -49,14 +49,16 @@ I calcoli di queste skill sono stati fatti attraverso formule che utilizza fifa 
 </br>
 </br>
 
-Per quanto riguarda i Team sono state seguite delle formule per decidere quanto un giocatore contribuisce nel calcolo della forza totale della squadra. I giocatori sono stati suddivisi in base alla loro posizione (Portiere, Difensore, Centrocampista, Attaccante). 
-In base a questa posizione il giocatore contribuirà ad ogni skill seguendo queste regole:
+Per quanto riguarda i Team sono state seguite delle formule per decidere quanto un giocatore contribuisce nel calcolo della forza totale della squadra. I giocatori sono stati suddivisi in base al loro ruolo (Portiere, Difensore, Centrocampista, Attaccante). 
+In base a questo ruolo il giocatore contribuirà ad ogni skill seguendo queste regole:
   <li> Pace: Attaccante 60%, Centrocampista 20%, Difensore 20%, Portiere 0% </li>  
-  <li> Passing </li>
-  <li> Defending </li>
-  <li> Shooting </li>
-  <li> Dribbling </li>
-  <li> Physical </li>
+  <li> Passing: Attaccante 10%, Centrocampista 80%, Difensore 10%, Portiere 0% </li>
+  <li> Defending: Attaccante 1%, Centrocampista 14%, Difensore 60%, Portiere 25% </li>
+  <li> Shooting: Attaccante 75%, Centrocampista 20%, Difensore 5%, Portiere 0% </li>
+  <li> Dribbling: Attaccante 70%, Centrocampista 20%, Difensore 10%, Portiere 0% </li>
+  <li> Physical: Attaccante 20%, Centrocampista 20%, Difensore 60%, Portiere 0% </li>
+  
+  
 ## Contributors
 - [Jerin George Mathew](https://github.com/jgeorgemathew)
 - [Luca Pasquini](https://github.com/lucapas)
