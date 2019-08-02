@@ -205,11 +205,11 @@ function handleClick(event){
     var player2=null;
     if(listOfPlayer1.length>1){
       player1=listOfPlayerStarPlot1[0];
-      listOfPlayers(listOfPlayer1,800,"Forse cercavi per player1 ");
+      listOfPlayers(listOfPlayer1,800,"Per il primo player forse cercavi:");
     }
     if(listOfPlayer2.length>1){
       player2=listOfPlayerStarPlot2[0];
-      listOfPlayers(listOfPlayer2,1010,"Forse cercavi per player2 ");
+      listOfPlayers(listOfPlayer2,1010,"Per il secondo player forse cercavi:");
     }
     if(listOfPlayer1.length==1){
       player1=listOfPlayerStarPlot1[0];
@@ -220,12 +220,12 @@ function handleClick(event){
     if(listOfPlayer1.length<=0){
       player1=data[0];
       listOfPlayerNew1=searchPlayer(data,document.getElementById("myVal1").value.toUpperCase().charAt(0));
-      listOfPlayers(listOfPlayerNew1[0],cfgListSuggerimenti.left,"Player1 non trovato, forse cercavi:");
+      listOfPlayers(listOfPlayerNew1[0],cfgListSuggerimenti.left,"Primo player non trovato forse cercavi:");
     }
     if(listOfPlayer2.length<=0){
       player2=data[1];
       listOfPlayerNew2=searchPlayer(data,document.getElementById("myVal2").value.toUpperCase().charAt(0))
-      listOfPlayers(listOfPlayerNew2[0],(cfgListSuggerimenti.left+cfgListSuggerimenti.width+10),"Player2 non trovato, forse cercavi:");
+      listOfPlayers(listOfPlayerNew2[0],(cfgListSuggerimenti.left+cfgListSuggerimenti.width+10),"Secondo player non trovato forse cercavi:");
     }
 
     //infine creo lo starplot

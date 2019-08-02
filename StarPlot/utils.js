@@ -276,20 +276,37 @@ output:
   il nome del giocatore che finirà nello starplot
 */
 function search(data,squadra,dist){
+  var descrizione="";
+  if(dist<150){
+    descrizione="Per il primo team forse cercavi:";
+  }else{
+    descrizione="Per il secondo team forse cercavi:";
+  }
+  if(dist==100){
+    descrizione="Forse cercavi:";
+  }
   var listOfPlayer1=searchPlayer(data,squadra);
 //creo la lista dei suggerimenti
   var player1=null;
   if(listOfPlayer1.length>1){
     player1=listOfPlayer1[0];
-    listOfPlayers(listOfPlayer1,cfgListSuggerimenti.left+dist,"Forse cercavi per Club1 ");
+    listOfPlayers(listOfPlayer1,cfgListSuggerimenti.left+dist,descrizione);
   }
   if(listOfPlayer1.length==1){
     player1=listOfPlayer1[0];
   }
   if(listOfPlayer1.length<=0){
+    if(dist<150){
+      descrizione="Primo team non trovato forse cercavi:";
+    }else{
+      descrizione="Secondo team non trovato forse cercavi:";
+    }
+    if(dist==100){
+      descrizione="Team non trovato forse cercavi:";
+    }
     listOfPlayerNew1=searchPlayer(data,squadra.charAt(0));
     player1=listOfPlayerNew1[0];
-    listOfPlayers(listOfPlayerNew1,cfgListSuggerimenti.left+dist,"Club1 non trovato, forse cercavi:");
+    listOfPlayers(listOfPlayerNew1,cfgListSuggerimenti.left+dist,descrizione);
   }
   return player1;
 }
