@@ -91,7 +91,6 @@ function createStarlPlot(data,nameClub1,formazione1,formazione_ripetuta){
   players=listOfPlayerIntoStarPlotOneTeam(data,nameClub1,formazione1);
   var club1=sixSkillGenerateForEachPlayerOneTeam(orderPlayer(players,formazione_ripetuta),formazione_ripetuta);
   var legendOptions = insertPlayer(club1,formazione_ripetuta);
-  console.log(club1);
   var attribute=["Pace","Passing","Defending", "Shooting", "Dribbling", "Physical"];
   StarPlotMorePlayers.legenda(legendOptions,cfgLegend,nameClub1);
   StarPlotMorePlayers.starPlot(cfgStarPlot,creaSintassiPerStarPlotMorePlayers(club1,attribute),attribute,legendOptions,cfgLegend);
@@ -175,7 +174,6 @@ function listOfPlayerIntoStarPlotOneTeam(data, team1, formazione1){
       });
     });
   }
-  console.log(playersClub1);
   return playersClub1;
 }
 
@@ -203,6 +201,7 @@ function sixSkillGenerateForEachPlayerOneTeam(squadra,formazione){
     });
     giocatori.push(player);
   });
+  console.log(giocatori);
   return giocatori;
 }
 
