@@ -1,2 +1,4 @@
 # Infovis Star Plot Fifa 19
-## Ciao
+## Star Plot Players
+
+In questa vista si possono confrontare diversi giocatori
