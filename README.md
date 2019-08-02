@@ -36,7 +36,6 @@ Queste 6 skill per i giocatori di movimento e per i team sono:
 
 </br>
 Invece per i portieri abbiamo queste altre 6 skill: 
-</br>
   <li> Diving </li>  
   <li> Handling </li>
   <li> Positioning </li>
