@@ -1,13 +1,13 @@
 # Starplots Fifa 2019
 Progetto per il corso di [Visualizzazione delle Informazioni](http://www.dia.uniroma3.it/~infovis/). Implementazione di una interfaccia grafica composta da 3 viste per comparare le statistiche [FIFA 2019](https://it.wikipedia.org/wiki/FIFA_19) di giocatori e squadre. Le tre viste realizzate sono:
 
-- Starplot per confrontare due giocatori (di seguito indicato come *Starplot players*);
-- Starplot per confrontare due squadre (di seguito indicato come *Starplot teams*);
-- Starplot che mostra il contributo individuale dei vari giocatori alla squadra (di seguito indicato come *Starplot Top 11*);.
+- Starplot per confrontare due giocatori;
+- Starplot per confrontare due squadre;
+- Starplot che mostra il contributo individuale dei vari giocatori alla squadra.
 
 Segue una breve descrizione delle tre viste.
 
-## Viste
+## 1. Viste
 
 #### Starplot per confrontare due giocatori
 
@@ -27,17 +27,17 @@ Sotto la legenda sono presenti due link (uno per ciascuna squadra nella vista co
 In questa vista è possibile visualizzare come i singoli giocatori contribuiscono alle statistiche (skill) della squadra in cui giocano. Sempre in questa vista, selezionando due giocatori dalla legenda, verrà mostrato un link che punta alla vista che consente di poter confrontare i giocatori selezionati.
 
 
-## Barre di Ricerca
+## 2. Barre di Ricerca
 
 Nelle tre viste sono presenti delle barre di ricerca per inserire i giocatori (o i team) che si intendono confrontare. 
-Nella ricerca di un giocatore, se vengono trovati più giocatori oppure non viene trovato nessun giocatore appare una lista di suggerimenti di giocatori.
-Nelle viste Star Plot Teams e Star Plot Top 11 è presente una barra per decidere che formazione si vuole utilizzare per la visualizzazione del team.
+Qualora il nome digitato non fosse corretto, verranno mostrati dei suggerimenti all'utente.
+Nelle viste Star Plot Teams e Star Plot Top 11 è presente una barra _dropdown_ per poter selezionare la formazione sulla base della quale computare e visualizzare le statistiche del team in questione.
 
-### Skill
+### 3. Skills
 
 Il confronto tra due giocatori o due squadre viene effettuato attraverso la comparazione di 6 skill. 
 </br>
-Queste 6 skill per i giocatori di movimento e per i team sono: 
+Le skill in questione per i giocatori (che non siano portieri) sono le seguenti: 
   <li> Pace </li>  
   <li> Passing </li>
   <li> Defending </li>
@@ -46,7 +46,7 @@ Queste 6 skill per i giocatori di movimento e per i team sono:
   <li> Physical </li>
 
 </br>
-Invece per i portieri abbiamo queste altre 6 skill: 
+Si riportano di seguito le skill relative ai portieri: 
   <li> Diving </li>  
   <li> Handling </li>
   <li> Positioning </li>
@@ -55,19 +55,19 @@ Invece per i portieri abbiamo queste altre 6 skill:
   <li> Kicking </li>
 
 </br>
-I calcoli di queste skill sono stati fatti attraverso formule che utilizza fifa prese da questo link: https://www.fifauteam.com/player-ratings-guide-fifa-19/
+I valori di queste skill vengono calcolate secondo una serie di formule utilizzate [in questo sito] (https://www.fifauteam.com/player-ratings-guide-fifa-19/)
 </br>
 </br>
 
-Per quanto riguarda i Team sono state seguite delle formule per decidere quanto un giocatore contribuisce nel calcolo della forza totale della squadra. I giocatori sono stati suddivisi in base al loro ruolo (Portiere, Difensore, Centrocampista, Attaccante). 
-In base a questo ruolo il giocatore contribuirà ad ogni skill seguendo queste regole:
+Per quanto riguarda la terza vista, che come detto in precedenza mostra come i singoli giocatori incidono sulle caratteristiche complessive della squadra, sono state definite a priori delle percentuali che esprimono come ciascun giocatore, in base al ruolo, influisce sulle statistiche della squadra. 
+</br>
+Nello specifico, ciascun giocatore influisce con le sue abilità alle skill (_Pace_, _Shooting_, ecc.) della squadra in cui gioca secondo le seguenti percentuali:
   <li> Pace: Attaccante 60%, Centrocampista 20%, Difensore 20%, Portiere 0% </li>  
   <li> Passing: Attaccante 10%, Centrocampista 80%, Difensore 10%, Portiere 0% </li>
   <li> Defending: Attaccante 1%, Centrocampista 14%, Difensore 60%, Portiere 25% </li>
   <li> Shooting: Attaccante 75%, Centrocampista 20%, Difensore 5%, Portiere 0% </li>
   <li> Dribbling: Attaccante 70%, Centrocampista 20%, Difensore 10%, Portiere 0% </li>
   <li> Physical: Attaccante 20%, Centrocampista 20%, Difensore 60%, Portiere 0% </li>
-  
   
 ### Componenti del team
 - [Jerin George Mathew](https://github.com/jgeorgemathew)
