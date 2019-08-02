@@ -1,5 +1,5 @@
-# Infovis Star Plot Fifa 19
-Progetto per il corso di [Visualizzazione delle Informazioni](http://www.dia.uniroma3.it/~infovis/). Implementazione di una interfaccia grafica composta da 3 "viste" per comparare le statistiche [FIFA 2019](https://it.wikipedia.org/wiki/FIFA_19) di giocatori e squadre. Le tre viste realizzate sono:
+# Starplots Fifa 2019
+Progetto per il corso di [Visualizzazione delle Informazioni](http://www.dia.uniroma3.it/~infovis/). Implementazione di una interfaccia grafica composta da 3 viste per comparare le statistiche [FIFA 2019](https://it.wikipedia.org/wiki/FIFA_19) di giocatori e squadre. Le tre viste realizzate sono:
 
 - Starplot per confrontare due giocatori (di seguito indicato come *Starplot players*);
 - Starplot per confrontare due squadre (di seguito indicato come *Starplot teams*);
@@ -9,18 +9,22 @@ Segue una breve descrizione delle tre viste.
 
 ---
 
-### Starplot per confrontare due giocatori
+## Viste
 
-Con questa vista è possibile confrontare due giocatori sulla base di 6 skill (skill FIFA) differenti. 
-(se i due giocatori in questione sono portieri, e.g. Buffon e Mirante, le skill che vengono mostrate nello starplot saranno specifiche per i portieri, e.g).
-Sotto la legenda appare un link che porta alla vista Star Plot Team dove vengono confrontati i due team corrispondenti hai 2 giocatori che si stava visualizzando.
+#### Starplot per confrontare due giocatori
 
-### Star Plot Teams
+Con questa vista è possibile confrontare due giocatori sulla base di 6 skill differenti. 
+(se i due giocatori in questione sono portieri, e.g. Buffon e Mirante, le skill che vengono mostrate nello starplot saranno specifiche per i portieri, e.g *Diving*, *Handling*).
+Sotto la legenda è presente un link che punta alla vista che confronta le squadre dei due giocatori mostrati nella vista corrente.
 
-In questa vista si possono confrontare diversi team 2 alla volta in base a 6 skill differenti. 
-Sotto la legenda appaiono due link, uno per la prima squadra e uno per la seconda squadra, che porta alla vista Star Plot Top 11 dove viene visualizzata la top 11 del team corrispondente.
 
-### Star Plot Top 11
+#### Starplot per il confronto di due squadre
+
+Con questa vista è possibile confrontare due squadre sulla base di 6 skill differenti.
+Sotto la legenda sono presenti due link (uno per ciascuna squadra nella vista corrente), i quali rimandano alla vista che consente di vedere il contributo dei singoli giocatori alle statistiche complessive della squadra in cui giocano.
+
+
+#### Starplot che mostra i contribuiti individuali dei giocatori alla squadra
 
 In questa vista si possono visualizzare come ogni giocatore della top 11 di una squadra influisce sulla forza della squadra.
 Sotto la legenda appare un link, se vengono selezionati 2 giocatori, che porta alla vista Star Plot Players in cui vengono confrontati i due giocatori selezionati.
