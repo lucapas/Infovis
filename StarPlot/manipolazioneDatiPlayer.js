@@ -237,6 +237,10 @@ function handleClick(event){
 
     updateLinkForTeamComparison(firstPlayerTeamName, secondPlayerTeamName);
 
+    // show the selected players' names in the search bar
+    d3.select("#myVal1").property("value", player1["Name"]);
+    d3.select("#myVal2").property("value", player2["Name"]);
+
     /*d3.selectAll("svg").remove();
     var attribute=["difesa","centrocampista","attaccante"];
     var player1=[];
