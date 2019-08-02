@@ -25,6 +25,7 @@ Nelle viste Star Plot Teams e Star Plot Top 11 è presente una barra per decider
 ## Skill
 
 Il confronto tra due giocatori o due squadre viene effettuato attraverso la comparazione di 6 skill. 
+</br>
 Queste 6 skill per i giocatori di movimento e per i team sono: 
   <li> Pace </li>  
   <li> Passing </li>
@@ -33,7 +34,7 @@ Queste 6 skill per i giocatori di movimento e per i team sono:
   <li> Dribbling </li>
   <li> Physical </li>
 
-
+</br>
 Invece per i portieri abbiamo queste altre 6 skill: 
   <li> Diving </li>  
   <li> Handling </li>
@@ -42,7 +43,7 @@ Invece per i portieri abbiamo queste altre 6 skill:
   <li> Reactions </li>
   <li> Kicking </li>
 
-
+</br>
 I calcoli di queste skill sono stati fatti attraverso formule che utilizza fifa prese da questo link: https://www.fifauteam.com/player-ratings-guide-fifa-19/
 </br>
 
