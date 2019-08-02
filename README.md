@@ -1,28 +1,36 @@
 # Infovis Star Plot Fifa 19
-Progetto per il corso di visualizzazione delle informazione.
+Progetto per il corso di [Visualizzazione delle Informazioni](http://www.dia.uniroma3.it/~infovis/). Implementazione di una interfaccia grafica composta da 3 "viste" per comparare le statistiche [FIFA 2019](https://it.wikipedia.org/wiki/FIFA_19) di giocatori e squadre. Le tre viste realizzate sono:
 
-## Star Plot Players
+- Starplot per confrontare due giocatori (di seguito indicato come *Starplot players*);
+- Starplot per confrontare due squadre (di seguito indicato come *Starplot teams*);
+- Starplot che mostra il contributo individuale dei vari giocatori alla squadra (di seguito indicato come *Starplot Top 11*);.
 
-In questa vista si possono confrontare diversi giocatori 2 alla volta in base a 6 skill differenti. 
-Se due giocatori hanno il ruolo di portiere (es. Buffon e Mirante) gli indici dello starplot cambiano in base alle skill riguardanti il portiere.
+Segue una breve descrizione delle tre viste.
+
+---
+
+### Starplot per confrontare due giocatori
+
+Con questa vista è possibile confrontare due giocatori sulla base di 6 skill (skill FIFA) differenti. 
+(se i due giocatori in questione sono portieri, e.g. Buffon e Mirante, le skill che vengono mostrate nello starplot saranno specifiche per i portieri, e.g).
 Sotto la legenda appare un link che porta alla vista Star Plot Team dove vengono confrontati i due team corrispondenti hai 2 giocatori che si stava visualizzando.
 
-## Star Plot Teams
+### Star Plot Teams
 
 In questa vista si possono confrontare diversi team 2 alla volta in base a 6 skill differenti. 
 Sotto la legenda appaiono due link, uno per la prima squadra e uno per la seconda squadra, che porta alla vista Star Plot Top 11 dove viene visualizzata la top 11 del team corrispondente.
 
-## Star Plot Top 11
+### Star Plot Top 11
 
 In questa vista si possono visualizzare come ogni giocatore della top 11 di una squadra influisce sulla forza della squadra.
 Sotto la legenda appare un link, se vengono selezionati 2 giocatori, che porta alla vista Star Plot Players in cui vengono confrontati i due giocatori selezionati.
 
-## Barre di Ricerca
+### Barre di Ricerca
 
 Nella ricerca di un giocatore, se vengono trovati più giocatori oppure non viene trovato nessun giocatore appare una lista di suggerimenti di giocatori.
 Nelle viste Star Plot Teams e Star Plot Top 11 è presente una barra per decidere che formazione si vuole utilizzare per la visualizzazione del team.
 
-## Skill
+### Skill
 
 Il confronto tra due giocatori o due squadre viene effettuato attraverso la comparazione di 6 skill. 
 </br>
@@ -58,6 +66,6 @@ In base a questo ruolo il giocatore contribuirà ad ogni skill seguendo queste r
   <li> Physical: Attaccante 20%, Centrocampista 20%, Difensore 60%, Portiere 0% </li>
   
   
-## Contributors
+### Componenti del team
 - [Jerin George Mathew](https://github.com/jgeorgemathew)
 - [Luca Pasquini](https://github.com/lucapas)
