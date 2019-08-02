@@ -1,9 +1,15 @@
 # Infovis Star Plot Fifa 19
-Progetto per il corso di visualizzazione dell'informazione sul web
+Progetto per il corso di visualizzazione delle informazione
 
 ## Star Plot Players
 
-In questa vista si possono confrontare diversi giocatori
+In questa vista si possono confrontare diversi giocatori 2 alla volta. 
+Se due giocatori hanno il ruolo di portiere (es. Buffon e Mirante) gli indici dello starplot cambiano in base alle skill riguardanti il portiere.
+Sotto la legenda appare un link che porta alla vista Star Plot Team dove vengono confrontati i due team corrispondenti hai 2 giocatori che si stava visualizzando.
+
+## Star Plot Teams
+
+In questa vista si possono confrontare diversi team 2 alla volta. 
 
 
 ## Contributors
