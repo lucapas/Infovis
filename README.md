@@ -7,8 +7,6 @@ Progetto per il corso di [Visualizzazione delle Informazioni](http://www.dia.uni
 
 Segue una breve descrizione delle tre viste.
 
----
-
 ## Viste
 
 #### Starplot per confrontare due giocatori
@@ -26,11 +24,12 @@ Sotto la legenda sono presenti due link (uno per ciascuna squadra nella vista co
 
 #### Starplot che mostra i contribuiti individuali dei giocatori alla squadra
 
-In questa vista si possono visualizzare come ogni giocatore della top 11 di una squadra influisce sulla forza della squadra.
-Sotto la legenda appare un link, se vengono selezionati 2 giocatori, che porta alla vista Star Plot Players in cui vengono confrontati i due giocatori selezionati.
+In questa vista è possibile visualizzare come i singoli giocatori contribuiscono alle statistiche (skill) della squadra in cui giocano. Sempre in questa vista, selezionando due giocatori dalla legenda, verrà mostrato un link che punta alla vista che consente di poter confrontare i giocatori selezionati.
 
-### Barre di Ricerca
 
+## Barre di Ricerca
+
+Nelle tre viste sono presenti delle barre di ricerca per inserire i giocatori (o i team) che si intendono confrontare. 
 Nella ricerca di un giocatore, se vengono trovati più giocatori oppure non viene trovato nessun giocatore appare una lista di suggerimenti di giocatori.
 Nelle viste Star Plot Teams e Star Plot Top 11 è presente una barra per decidere che formazione si vuole utilizzare per la visualizzazione del team.
 
