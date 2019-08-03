@@ -55,7 +55,9 @@ Si riportano di seguito le skill relative ai portieri:
   <li> Kicking </li>
 
 </br>
-I valori di queste skill vengono calcolate secondo una serie di formule utilizzate [in questo sito](https://www.fifauteam.com/player-ratings-guide-fifa-19/)
+
+I valori di queste skill vengono calcolate secondo una serie di formule utilizzate in questo [sito](https://www.fifauteam.com/player-ratings-guide-fifa-19/)
+
 </br>
 </br>
 
@@ -74,4 +76,4 @@ Nello specifico, ciascun giocatore influisce con le sue abilità alle skill (_Pa
 - [Luca Pasquini](https://github.com/lucapas)
 
 ## 5. Live demo
-[link](https://lucapas.github.io/Infovis/StarPlotPlayers.html)
+È disponibile una live demo al seguente [link](https://lucapas.github.io/Infovis/StarPlotPlayers.html)
