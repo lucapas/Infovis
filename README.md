@@ -54,6 +54,7 @@ Si riportano di seguito le skill relative ai portieri:
   <li> Reactions </li>
   <li> Kicking </li>
 
+</br>
 
 I valori di queste skill vengono calcolate secondo una serie di formule utilizzate in questo [sito](https://www.fifauteam.com/player-ratings-guide-fifa-19/)
 
