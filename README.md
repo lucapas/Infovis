@@ -9,23 +9,26 @@ Segue una breve descrizione delle tre viste.
 
 ## 1. Viste
 
-#### Starplot per confrontare due giocatori
+#### 1.1 Starplot per confrontare due giocatori
 
 Con questa vista è possibile confrontare due giocatori sulla base di 6 skill differenti. 
 (se i due giocatori in questione sono portieri, e.g. Buffon e Mirante, le skill che vengono mostrate nello starplot saranno specifiche per i portieri, e.g *Diving*, *Handling*).
 Sotto la legenda è presente un link che punta alla vista che confronta le squadre dei due giocatori mostrati nella vista corrente.
 
+![player comparison](images/player-comparison.png)
 
-#### Starplot per il confronto di due squadre
+#### 1.2 Starplot per il confronto di due squadre
 
 Con questa vista è possibile confrontare due squadre sulla base di 6 skill differenti.
 Sotto la legenda sono presenti due link (uno per ciascuna squadra nella vista corrente), i quali rimandano alla vista che consente di vedere il contributo dei singoli giocatori alle statistiche complessive della squadra in cui giocano.
 
+![team comparison](images/team-comparison.png)
 
-#### Starplot che mostra i contribuiti individuali dei giocatori alla squadra
+#### 1.3 Starplot che mostra i contribuiti individuali dei giocatori alla squadra
 
 In questa vista è possibile visualizzare come i singoli giocatori contribuiscono alle statistiche (skill) della squadra in cui giocano. Sempre in questa vista, selezionando due giocatori dalla legenda, verrà mostrato un link che punta alla vista che consente di poter confrontare i giocatori selezionati.
 
+![top 11 comparison](images/top-11-comparison.png)
 
 ## 2. Barre di Ricerca
 
