@@ -55,9 +55,9 @@ Si riportano di seguito le skill relative ai portieri:
   <li> Kicking </li>
 
 </br>
-I valori di queste skill vengono calcolate secondo una serie di formule utilizzate [in questo sito] (https://www.fifauteam.com/player-ratings-guide-fifa-19/)
-</br>
-</br>
+
+I valori di queste skill vengono calcolate secondo una serie di formule utilizzate in questo [sito](https://www.fifauteam.com/player-ratings-guide-fifa-19/)
+
 
 Per quanto riguarda la terza vista, che come detto in precedenza mostra come i singoli giocatori incidono sulle caratteristiche complessive della squadra, sono state definite a priori delle percentuali che esprimono come ciascun giocatore, in base al ruolo, influisce sulle statistiche della squadra. 
 </br>
@@ -72,3 +72,6 @@ Nello specifico, ciascun giocatore influisce con le sue abilità alle skill (_Pa
 ## 4. Componenti del team
 - [Jerin George Mathew](https://github.com/jgeorgemathew)
 - [Luca Pasquini](https://github.com/lucapas)
+
+## 5. Live demo
+È disponibile una live demo al seguente [link](https://lucapas.github.io/Infovis/StarPlotPlayers.html)
