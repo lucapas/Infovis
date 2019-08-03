@@ -54,12 +54,9 @@ Si riportano di seguito le skill relative ai portieri:
   <li> Reactions </li>
   <li> Kicking </li>
 
-</br>
 
 I valori di queste skill vengono calcolate secondo una serie di formule utilizzate in questo [sito](https://www.fifauteam.com/player-ratings-guide-fifa-19/)
 
-</br>
-</br>
 
 Per quanto riguarda la terza vista, che come detto in precedenza mostra come i singoli giocatori incidono sulle caratteristiche complessive della squadra, sono state definite a priori delle percentuali che esprimono come ciascun giocatore, in base al ruolo, influisce sulle statistiche della squadra. 
 </br>
